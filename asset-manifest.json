@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/Borghese-Gladiator.github.io/static/css/main.5e4e3f0f.chunk.css",
+    "main.js": "/Borghese-Gladiator.github.io/static/js/main.39ddc874.chunk.js",
+    "main.js.map": "/Borghese-Gladiator.github.io/static/js/main.39ddc874.chunk.js.map",
+    "runtime-main.js": "/Borghese-Gladiator.github.io/static/js/runtime-main.0ad7e013.js",
+    "runtime-main.js.map": "/Borghese-Gladiator.github.io/static/js/runtime-main.0ad7e013.js.map",
+    "static/css/2.ab965100.chunk.css": "/Borghese-Gladiator.github.io/static/css/2.ab965100.chunk.css",
+    "static/js/2.c8e730aa.chunk.js": "/Borghese-Gladiator.github.io/static/js/2.c8e730aa.chunk.js",
+    "static/js/2.c8e730aa.chunk.js.map": "/Borghese-Gladiator.github.io/static/js/2.c8e730aa.chunk.js.map",
+    "index.html": "/Borghese-Gladiator.github.io/index.html",
+    "precache-manifest.6c324fb89bc33057573f9c3ed71658b8.js": "/Borghese-Gladiator.github.io/precache-manifest.6c324fb89bc33057573f9c3ed71658b8.js",
+    "service-worker.js": "/Borghese-Gladiator.github.io/service-worker.js",
+    "static/css/2.ab965100.chunk.css.map": "/Borghese-Gladiator.github.io/static/css/2.ab965100.chunk.css.map",
+    "static/css/main.5e4e3f0f.chunk.css.map": "/Borghese-Gladiator.github.io/static/css/main.5e4e3f0f.chunk.css.map",
+    "static/js/2.c8e730aa.chunk.js.LICENSE.txt": "/Borghese-Gladiator.github.io/static/js/2.c8e730aa.chunk.js.LICENSE.txt",
+    "static/media/Audio-Waveforms-Featued-Image.jpg": "/Borghese-Gladiator.github.io/static/media/Audio-Waveforms-Featued-Image.74871842.jpg",
+    "static/media/Can-data-science-predict-the-stock-market-.jpg": "/Borghese-Gladiator.github.io/static/media/Can-data-science-predict-the-stock-market-.1ad54271.jpg",
+    "static/media/Current_Resume.pdf": "/Borghese-Gladiator.github.io/static/media/Current_Resume.ef771466.pdf",
+    "static/media/HackUMass-Seven-Logo.png": "/Borghese-Gladiator.github.io/static/media/HackUMass-Seven-Logo.3557b791.png",
+    "static/media/HackUMass-Six-Logo-1.png": "/Borghese-Gladiator.github.io/static/media/HackUMass-Six-Logo-1.dbbaf5c7.png",
+    "static/media/Lexhack-Logo.jpg": "/Borghese-Gladiator.github.io/static/media/Lexhack-Logo.cad61d05.jpg",
+    "static/media/People-Collage.jpg": "/Borghese-Gladiator.github.io/static/media/People-Collage.f0abe0ae.jpg",
+    "static/media/NavigationMenu.css": "/Borghese-Gladiator.github.io/static/media/Precious.fe9d1229.svg",
+    "static/media/RSA_Security_Logo.png": "/Borghese-Gladiator.github.io/static/media/RSA_Security_Logo.bd948c30.png",
+    "static/media/community-hero.png": "/Borghese-Gladiator.github.io/static/media/community-hero.ba9f6ee2.png",
+    "static/media/intro-bg.png": "/Borghese-Gladiator.github.io/static/media/intro-bg.3942d6ef.png",
+    "static/media/kitten-puppy-cute.png": "/Borghese-Gladiator.github.io/static/media/kitten-puppy-cute.ccbb7527.png",
+    "static/media/leap-motion.png": "/Borghese-Gladiator.github.io/static/media/leap-motion.d2adc0d1.png",
+    "static/media/umass.png": "/Borghese-Gladiator.github.io/static/media/umass.406466fb.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0ad7e013.js",
+    "static/css/2.ab965100.chunk.css",
+    "static/js/2.c8e730aa.chunk.js",
+    "static/css/main.5e4e3f0f.chunk.css",
+    "static/js/main.39ddc874.chunk.js"
+  ]
+}
