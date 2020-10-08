@@ -6,7 +6,7 @@ import HackUMassSixLogo from '../img/HackUMass-Six-Logo-1.png'
 import LexHackLogo from '../img/Lexhack-Logo.jpg'
 import StockMarketImg from '../img/Can-data-science-predict-the-stock-market-.jpg'
 import AudioImg from '../img/Audio-Waveforms-Featued-Image.jpg'
-import PeopleCollageImg from '../img/47475754-all-about-people-collage-of-diverse-multi-ethnic-and-mixed-age-people-expressing-different-emotions.jpg'
+import PeopleCollageImg from '../img/People-Collage.jpg'
 
 export const projectData = [
   {
