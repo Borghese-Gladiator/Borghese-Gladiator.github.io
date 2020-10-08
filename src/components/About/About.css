@@ -1,0 +1,33 @@
+.divider-container{
+  display: flex;
+  align-items: center;
+}
+
+.divider-border{
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.divider-content {
+  padding: 0 15px 0 15px;
+  font-size: calc(8px + 1.5vw);
+  white-space: nowrap; /* Make it one line */
+  font-style: italic;
+}
+/*.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity 1.0s ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}*/
