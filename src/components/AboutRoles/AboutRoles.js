@@ -119,7 +119,6 @@ function RecipeReviewCard(props) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: "-30vh",
     padding: "5vh",
   },
   control: {
@@ -145,6 +144,7 @@ export default function AboutRoles(props) {
                   desc={obj.desc}
                   useDesc={obj.useDesc}
                   toolNamesList={obj.toolNamesList}
+                  style={{background: "#fff"}}
                 />
               </Grid>
             ))}

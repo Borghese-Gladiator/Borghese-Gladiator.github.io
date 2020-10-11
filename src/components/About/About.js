@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
 import './About.css'
 
 const Divider = ({ children }) => {
@@ -16,10 +17,12 @@ const Divider = ({ children }) => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  aboutContent: {
-    padding: theme.spacing(15, 0, 40),
+  aboutContainer: {
+    marginTop: "40px",
+    padding: theme.spacing(10, 10, 10),
     textAlign: "center",
-    background: "#0FA3B1"
+    boxShadow: "5px 10px 8px 10px #888888",
+    background: "#fff"
   },
   // https://stackoverflow.com/questions/23984629/how-to-set-min-font-size-in-css
   headerText: {
@@ -38,19 +41,16 @@ export default function AboutSection({id, aboutText, currentStatusText }) {
   const classes = useStyles();
 
   return (
-    <div id={id} className={classes.aboutContent}>
-      <CSSTransitionGroup
-        transitionName="example"
-        transitionAppear={true}
-        transitionAppearTimeout={500}
-        transitionEnter={false}
-        transitionLeave={false}
-      >
-        <Divider>Hey there</Divider>
-        <h3 className={classes.headerText}>I'm Tim</h3>
-        <p className={classes.aboutText}>{aboutText}</p>
-      </CSSTransitionGroup>
-    </div>
+    <Container id={id} className={classes.aboutContainer}>
+      <Divider>Hey there</Divider>
+      <h3 className={classes.headerText}>I'm Tim</h3>
+      <Typography variant="h5" align="center" color="textPrimary" paragraph>
+        {currentStatusText}
+      </Typography>
+      <Typography variant="p" align="center" paragraph className={classes.aboutText}>
+        {aboutText}
+      </Typography>
+    </Container>
   );
 }
 /*

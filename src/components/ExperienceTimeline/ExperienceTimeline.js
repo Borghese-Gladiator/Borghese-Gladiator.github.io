@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-// UMass Card
-import { Card as SemanticCard, Image, Container } from 'semantic-ui-react'
+import Container from '@material-ui/core/Container'
 import { Timeline, TimelineItem }  from 'vertical-timeline-component-for-react';
 import UMassLogoImg from '../../img/umass.png'
 // Experience Card
@@ -26,8 +25,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 80,
   },
   skillIcon: {
-    maxHeight: 28,
-    maxWidth: 28
+    maxHeight: 18,
+    maxWidth: 18,
+    marginRight: 5
   },
   inlineFlex: {
     display: 'flex',
@@ -144,10 +144,11 @@ const iconMapping = {
 
 export default function ExperienceTimeline(props) {
   const { id, experienceData } = props
+  const classes = useStyles();
 
   return (
-    <Container id={id} style={{textAlign: "center", marginTop: "9vw", fontSize:15}}>
-      <h1>My Experience</h1>
+    <Container id={id}>
+      <h1 style={{textAlign: "center"}}>My Experience</h1>
       <Timeline lineColor={'#ddd'}>
         <TimelineItem
           key="001"
@@ -155,20 +156,21 @@ export default function ExperienceTimeline(props) {
           dateInnerStyle={{ background: '#32a852' }}
           style={{ color: '#32a852' }}
         >
-          <SemanticCard style={{minWidth:600}}>
-            <SemanticCard.Content>
-              <Image
-                floated='right'
-                size='tiny'
-                src={ UMassLogoImg }
-              />
-              <SemanticCard.Header>Graduation - UMass Amherst</SemanticCard.Header>
-              <SemanticCard.Meta>Amherst, MA</SemanticCard.Meta>
-              <SemanticCard.Description>
-                <p>I am on course to receive my Computer Science <strong>Bachelor's Degree</strong></p>
-              </SemanticCard.Description>
-            </SemanticCard.Content>
-          </SemanticCard>
+          <Card className={classes.root}>
+            <CardHeader
+              avatar={
+                <img className={classes.logo} src={UMassLogoImg} alt={"UMass Logo"} />
+              }
+              title={"Graduation - UMass Amherst"}
+              subheader={"Amherst, MA"}
+              titleTypographyProps={{variant:'h6' }}
+            />
+            <CardContent className={classes.cardcontent}>
+              <Typography component="body">
+                I am on course to receive my Computer Science <strong>Bachelor's Degree</strong>
+              </Typography>
+            </CardContent>
+          </Card>
         </TimelineItem>
         {
           experienceData.map((obj, idx) => {
