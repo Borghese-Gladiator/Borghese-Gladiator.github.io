@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   heroButtons: {
     marginTop: theme.spacing(4),
   },
-  resumeButton: {
+  primaryButton: {
     color: "white",
     backgroundColor: "black",
     '&:hover': {
@@ -32,11 +32,13 @@ export default function Album(props) {
   const classes = useStyles();
   const mobile = false
 
-  const [isShown, setIsShown] = useState(false);
-  const primaryButtonContent = isShown ? <>Resume <ArrowRightAltIcon /></> : <>Get Started <ArrowRightAltIcon /></>
+  const [resumeArrowShown, setResumeArrowShown] = useState(false);
+  const [githubArrowShown, setGitHubArrowShown] = useState(false);
+  const resumeButton = resumeArrowShown ? <>Resume <ArrowRightAltIcon /></> : <>Resume</>
+  const githubButton = githubArrowShown ? <>View GitHub <ArrowRightAltIcon /></> : <>View GitHub</>
 
   return (
-    <div id={id} style={{backgroundImage: `url(${MyBackgroundImg})`}}>
+    <div id={id} style={{ backgroundImage: `url(${MyBackgroundImg})` }}>
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
           <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
@@ -45,38 +47,37 @@ export default function Album(props) {
               text={['FullStack Developer.', 'DevOps Engineer.', 'NLP Enthusiast.']}
             />
           </Typography>
-          <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            I'm an undergrad graduating in May 2021 with a Bachelor's in Computer Science from UMass Amherst
-          </Typography>
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justify="center">
               <Grid item>
                 <Button
                   component="a"
-                  className={classes.resumeButton}
+                  className={classes.primaryButton}
                   variant="contained"
                   color="primary"
                   href={ResumePDF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  
-                  onMouseEnter={() => setIsShown(true)}
-                  onMouseLeave={() => setIsShown(false)}
+
+                  onMouseEnter={() => setResumeArrowShown(true)}
+                  onMouseLeave={() => setResumeArrowShown(false)}
                 >
-                  {primaryButtonContent}
+                  {resumeButton}
                 </Button>
               </Grid>
               <Grid item>
                 <Button
                   component="a"
-                  className={classes.resumeButton}
+                  className={classes.primaryButton}
                   variant="outlined"
                   color="primary"
                   href="https://github.com/Borghese-Gladiator"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onMouseEnter={() => setGitHubArrowShown(true)}
+                  onMouseLeave={() => setGitHubArrowShown(false)}
                 >
-                  View GitHub
+                  {githubButton}
                 </Button>
               </Grid>
             </Grid>
@@ -93,7 +94,7 @@ export default function Album(props) {
           >
             "The secret to getting ahead is getting started."
           </h3>
-          <h3 align="right" style={{paddingRight:'50px'}}>- Mark Twain{'   '}</h3>
+          <h3 align="right" style={{ paddingRight: '50px' }}>- Mark Twain{'   '}</h3>
         </Container>
       </div>
     </div>

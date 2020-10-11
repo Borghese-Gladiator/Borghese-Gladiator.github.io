@@ -1,35 +1,3 @@
-.example-component {
-  width: 100px;
-  height: 100px;
-  background-color: red;
-  -webkit-transition: 0.5s;
-  -moz-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-  opacity: 0;
-  visibility: hidden; 
-}
-.example-component.show {
-  opacity: 1;
-  visibility: visible; 
-}
-
-.box {
-  background-color: yellow;
-  border: solid 1px black;
-  height: 100px;
-  width: 100px;
-  opacity: 1.0;
-  box-sizing: border-box;
-  transition: height 500ms 0ms, opacity 500ms 500ms;
-}
-
-.box.hide {
-  transition: height 500ms 500ms, opacity 500ms 0ms;
-  opacity: 0.0;
-  height: 0px;
-}
-
 .App-header {
   min-height: 100vh;
   display: flex;
