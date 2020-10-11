@@ -12,6 +12,7 @@ import JavaIcon from '../../assets/icons/icons8-java-48.png'
 import ReactIcon from '../../assets/icons/icons8-react-100.png'
 import JavaScriptIcon from '../../assets/icons/icons8-javascript-48.png'
 import PythonIcon from '../../assets/icons/icons8-python-48.png'
+import FadeIn from 'react-fade-in';
 import KittenPuppyImg from '../../img/kitten-puppy-cute.png'
 import { blue, green } from '@material-ui/core/colors';
 // navbar icons
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    opacity: 0.8,
+    opacity: 0.7,
     backgroundBlendMode: "normal,luminosity",
     backdropFilter: 'blur(5px)',
     boxShadow: '3px 6px 20px rgba(104,102,255,.44), -3px -6px 10px hsla(0,0%,100%,.6)'
@@ -89,8 +90,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: 'block',
-    fontFamily: "Precious",
-    fontSize: 40
+    fontFamily: "Precious"
   },
   grow: {
     flexGrow: 1,
@@ -140,19 +140,19 @@ const useStyles = makeStyles((theme) => ({
   lightBlue: {
     color: '#fff',
     backgroundColor: blue[300],
-  }
+  },
 }));
 
-export default function NavigationMenu() {
+export default function SearchAppBar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (open) => (event) => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    setOpen(open)
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
   };
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -181,7 +181,7 @@ export default function NavigationMenu() {
         { text: 'About', link: 'about', iconFunc: () => { return <AccountCircleIcon /> } },
         { text: 'Experience', link: 'experience', iconFunc: () => { return <WorkIcon /> } },
         { text: 'Projects', link: 'projects', iconFunc: () => { return <AppsIcon /> } },
-        { text: 'Skills', link: 'languages', iconFunc: () => { return <CodeIcon /> } }
+        { text: 'Skills', link: 'skills', iconFunc: () => { return <CodeIcon /> } }
       ].map((obj, idx) => {
         // React Scroll Link (not Material UI Link)
         return (
@@ -198,73 +198,6 @@ export default function NavigationMenu() {
     </Menu>
   );
 
-  const list = (open) => {
-    return (
-      <div
-        role="presentation"
-        onClick={toggleDrawer(false)}
-        onKeyDown={toggleDrawer(false)}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={toggleDrawer(false)}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon style={{fill: "white"}} /> : <ChevronRightIcon style={{fill: "white"}} />}
-          </IconButton>
-        </div>
-        <Divider />
-        <div style={{textAlign:"center"}}>
-          <h3 style={{ fontWeight: 'bold', color:"#f7f7f7"}}>TIMOTHY SHEE</h3>
-          <img src={KittenPuppyImg} className={classes.drawerImage} alt="Kitten Sidebar" />
-          <br />
-          <h1>Developer.</h1>
-          <br />
-          <div style={{display: "flex" }}>
-            {[
-              { text: "Java", iconAltText: "Java Icon", iconPath: JavaIcon },
-              { text: "JS", iconAltText: "JavaScript Icon", iconPath: JavaScriptIcon },
-              { text: "React", iconAltText: "React Icon", iconPath: ReactIcon },
-              { text: "Python", iconAltText: "Python Icon", iconPath: PythonIcon },
-            ].map((obj, idx) => {
-              return (
-                <div key={"SidebarSkills" + idx}>
-                  <img src={obj.iconPath} alt={obj.iconAltText} className={classes.iconSize} />
-                  <span>{obj.text}</span>
-                </div>
-              )
-            })}
-          </div>
-          <br />
-          <List>
-            {[
-              { text: 'tim.shee0791@gmail.com', link: '"mailto:tim.shee0791@gmail.com', avatarColorClass: classes.green, iconFunc: () => { return <MailIcon style={{fill: "black"}} /> } },
-              { text: 'GitHub', link: 'https://github.com/Borghese-Gladiator', avatarColorClass: classes.green, iconFunc: () => { return <GitHubIcon style={{fill: "black"}} /> } },
-              { text: 'LinkedIn', link: 'https://www.linkedin.com/in/timothy-shee-aa46a5170/', avatarColorClass: classes.lightBlue, iconFunc: () => { return <LinkedInIcon style={{fill: "black"}} /> } }
-            ].map((obj, idx) => {
-              return (
-                <Link target="_blank" rel="noopener noreferrer"
-                  href={obj.link}
-                  style={{
-                    color: 'inherit',
-                    fontSize: "15px"
-                  }}
-                  key={"SidebarContact" + idx}
-                >
-                  <ListItem button key={obj.text + idx} className={classes.linkHover}>
-                    <ListItemAvatar>
-                      <Avatar>
-                        {obj.iconFunc()}
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary={obj.text} />
-                  </ListItem>
-                </Link>
-              )
-            })}
-          </List>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div>
       <CssBaseline />
@@ -274,8 +207,7 @@ export default function NavigationMenu() {
           [classes.appBarShift]: open,
         })}
         style={{
-          background: "linear-gradient(#000000, #828282)",
-          padding: "5px"
+          backgroundColor: "#262626"
         }}
       >
         <Toolbar>
@@ -283,12 +215,12 @@ export default function NavigationMenu() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            onClick={toggleDrawer(true)}
+            onClick={handleDrawerOpen}
             className={clsx(classes.menuButton, open && classes.hide)}
           >
             <MenuIcon fontSize="large" />
           </IconButton>
-          <Typography className={classes.title} noWrap>
+          <Typography className={classes.title} variant="h3" noWrap>
             Timothy Shee
           </Typography>
           <div className={classes.grow} />
@@ -325,15 +257,72 @@ export default function NavigationMenu() {
       </AppBar>
       {renderMobileMenu}
       <Drawer
+        className={classes.drawer}
+        variant="persistent"
         anchor="left"
         open={open}
-        onClose={toggleDrawer(false)}
-        className={classes.drawer}
         classes={{
           paper: classes.drawerPaper,
         }}
       >
-        {list(open)}
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon style={{fill: "white"}} /> : <ChevronRightIcon style={{fill: "white"}} />}
+          </IconButton>
+        </div>
+        <Divider />
+        <div style={{textAlign:"center"}}>
+          <FadeIn delay='500' transitionDuration='500'>
+            <h3 style={{ fontWeight: 'bold', color:"#f7f7f7"}}>TIMOTHY SHEE</h3>
+            <img src={KittenPuppyImg} className={classes.drawerImage} alt="Kitten Sidebar" />
+            <br />
+            <h1>Developer.</h1>
+            <br />
+            <div style={{display: "flex" }}>
+              {[
+                { text: "Java", iconAltText: "Java Icon", iconPath: JavaIcon },
+                { text: "JS", iconAltText: "JavaScript Icon", iconPath: JavaScriptIcon },
+                { text: "React", iconAltText: "React Icon", iconPath: ReactIcon },
+                { text: "Python", iconAltText: "Python Icon", iconPath: PythonIcon },
+              ].map((obj, idx) => {
+                return (
+                  <div key={"SidebarSkills" + idx}>
+                    <img src={obj.iconPath} alt={obj.iconAltText} className={classes.iconSize} />
+                    <span>{obj.text}</span>
+                  </div>
+                )
+              })}
+            </div>
+            <br />
+            <List>
+              {[
+                { text: 'tim.shee0791@gmail.com', link: '"mailto:tim.shee0791@gmail.com', avatarColorClass: classes.green, iconFunc: () => { return <MailIcon style={{fill: "black"}} /> } },
+                { text: 'GitHub', link: 'https://github.com/Borghese-Gladiator', avatarColorClass: classes.green, iconFunc: () => { return <GitHubIcon style={{fill: "black"}} /> } },
+                { text: 'LinkedIn', link: 'https://www.linkedin.com/in/timothy-shee-aa46a5170/', avatarColorClass: classes.lightBlue, iconFunc: () => { return <LinkedInIcon style={{fill: "black"}} /> } }
+              ].map((obj, idx) => {
+                return (
+                  <Link target="_blank" rel="noopener noreferrer"
+                    href={obj.link}
+                    style={{
+                      color: 'inherit',
+                      fontSize: "15px"
+                    }}
+                    key={"SidebarContact" + idx}
+                  >
+                    <ListItem button key={obj.text + idx} className={classes.linkHover}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          {obj.iconFunc()}
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={obj.text} />
+                    </ListItem>
+                  </Link>
+                )
+              })}
+            </List>
+          </FadeIn>
+        </div>
       </Drawer>
     </div>
   );
