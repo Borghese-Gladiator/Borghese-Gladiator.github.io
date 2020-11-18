@@ -12,13 +12,16 @@ export const experienceData = [
     location: "Bedford, MA",
     skills:['Jenkins', 'Python', 'Git', 'Agile/Jira', 'Linux'],
     teamInfo:"NetWitness Team - SIEM Technology",
-    summary: "I created a Scripted Pipeline to run a list of pipelines to auto test & auto deploy to production new and modified content.",
+    summary: "I setup CD for threat content with Jenkins pipeline list to auto test & auto deploy to production new and modified content.",
     materialUIDesc: () => {
       return (
         <div>
           <Typography paragraph>2020 Summer:</Typography>
           <Typography paragraph>
             Established CI/CD Jenkins Scripted Pipeline that automated testing and deployment of threat content (specifically lua parsers and esa rules).
+          </Typography>
+          <Typography paragraph>
+            Each individual pipeline did one task (eg: run regression test, deploy content from inputted file) and were coordinated by the Scripted Pipeline.
           </Typography>
           <Typography paragraph>
             Created custom scripts to find all modified content, setup for regression tests, aggregate Python nosetest XML reports, and deploy to test production server. This foundation means when all content is added, QA and Release Engineering will have been completely automated for the threat content team.
