@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
+import Link from '@material-ui/core/Link'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -29,13 +30,26 @@ import CardContent from '@material-ui/core/CardContent';
 */
 import ReactCardFlip from 'react-card-flip';
 
+const useCardStyles = makeStyles((theme) => ({
+  longTextTypography: {
+    textAlign: 'left',
+    whiteSpace: 'pre-line'
+  },
+  icon: {
+    height: 36,
+    width: 48
+  }
+}));
+
+
 function MyCard(props) {
-  const { header, about, longDesc, imgSrc, iconSrc, link, madeAtEvent, eventLink,  } = props
+  const classes = useCardStyles();
+  // if madeAtEvent is true, only then will iconPath & eventLink
+  const { header, about, imgSrc, link, longDesc, madeAtEvent, iconPath, eventLink } = props
   const [isFlipped, setIsFlipped] = React.useState(false);
   
   return (
     <Card>
-      
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <CardActionArea
           onMouseEnter={() => setIsFlipped(true)}
@@ -63,8 +77,8 @@ function MyCard(props) {
           <Typography gutterBottom variant="h5" component="h2">
             {header}
           </Typography>
-          <Typography variant="body2" component="p">
-            {about}
+          <Typography variant="body" component="p" className={classes.longTextTypography}>
+            {longDesc}
           </Typography>
           <Button variant="contained" onClick={() => setIsFlipped(false)}>Click to Flip</Button>
         </CardContent>
@@ -73,10 +87,10 @@ function MyCard(props) {
       <CardActions style={{justifyContent: 'center'}}>
         {madeAtEvent &&
           <Button size="small" color="primary" href={eventLink} target="_blank" rel="noopener">
-            Event Info
+            {iconPath && <img src={iconPath} alt="icon of event" className={classes.icon} />} Event Info
           </Button>
         }
-        <Button size="small" color="primary" href={link} target="_blank" rel="noopener">
+        <Button size="small" color="primary" target="_blank" rel="noopener" href={link}>
           Visit Website <ArrowForwardIosIcon />
         </Button>
       </CardActions>
@@ -98,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CenteredGrid(props) {
+export default function ProjectList(props) {
   const { id, projectData } = props
   const classes = useStyles()
 
@@ -122,10 +136,11 @@ export default function CenteredGrid(props) {
                 header={obj.header}
                 about={obj.about}
                 imgSrc={obj.imgSrc}
-                iconSrc={obj.iconSrc}
+                link={obj.link}
+                longDesc={obj.longDesc}
                 madeAtEvent={obj.madeAtEvent}
                 eventLink={obj.eventLink}
-                longDesc={obj.longDesc}
+                iconPath={obj.iconPath}
               />
             </Grid>
           )
