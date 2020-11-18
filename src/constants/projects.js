@@ -17,7 +17,8 @@ export const projectData = [
     "imgSrc": PeopleCollageImg,
     "iconSrc": "",
     "link":"https://dashboard.hackumass.com/projects/63",
-    "madeAtEvent": false
+    "madeAtEvent": false,
+    "longDesc": ""
   },
   {
     "header":"NLP Stock Predictor",
@@ -27,7 +28,8 @@ export const projectData = [
     "imgSrc": StockMarketImg,
     "iconSrc": "",
     "link":"https://dashboard.hackumass.com/projects/63",
-    "madeAtEvent": false
+    "madeAtEvent": false,
+    "longDesc": ""
   },
   {
     "header":"Hololive Audio Redirect",
@@ -36,7 +38,8 @@ export const projectData = [
     "imgSrc": AudioImg,
     "iconSrc": "",
     "link":"https://borghese-gladiator.github.io/hololive-audio/#/",
-    "madeAtEvent": false
+    "madeAtEvent": false,
+    "longDesc": ""
   },
   {
     "header":"HackUMass 2019: Transposit Winner",
@@ -47,7 +50,8 @@ export const projectData = [
     "iconSrc": HackUMassSevenLogo,
     "link":"https://dashboard.hackumass.com/projects/63",
     "madeAtEvent": true,
-    "eventLink": "https://hondoori.wordpress.com/yakuza-stuff/translated-guides/karaoke-song-lyrics/%E9%A6%AC%E9%B9%BF%E3%81%BF%E3%81%9F%E3%81%84-baka-mitai-lyrics/"
+    "eventLink": "https://hondoori.wordpress.com/yakuza-stuff/translated-guides/karaoke-song-lyrics/%E9%A6%AC%E9%B9%BF%E3%81%BF%E3%81%9F%E3%81%84-baka-mitai-lyrics/",
+    "longDesc": "longDesc"
   },
   {
     "header":"LexHack: Web Scraper",
@@ -58,7 +62,8 @@ export const projectData = [
     "iconSrc": LexHackLogo,
     "link":"",
     "madeAtEvent": true,
-    "eventLink": "https://hondoori.wordpress.com/yakuza-stuff/translated-guides/karaoke-song-lyrics/%E9%A6%AC%E9%B9%BF%E3%81%BF%E3%81%9F%E3%81%84-baka-mitai-lyrics/"
+    "eventLink": "https://hondoori.wordpress.com/yakuza-stuff/translated-guides/karaoke-song-lyrics/%E9%A6%AC%E9%B9%BF%E3%81%BF%E3%81%9F%E3%81%84-baka-mitai-lyrics/",
+    "longDesc": "longDesc"
   },
   {
     "header":"HackUmass 2018",
@@ -69,6 +74,7 @@ export const projectData = [
     "iconSrc": HackUMassSixLogo,
     "link":"",
     "madeAtEvent": true,
-    "eventLink": "https://hondoori.wordpress.com/yakuza-stuff/translated-guides/karaoke-song-lyrics/%E9%A6%AC%E9%B9%BF%E3%81%BF%E3%81%9F%E3%81%84-baka-mitai-lyrics/"
+    "eventLink": "https://hondoori.wordpress.com/yakuza-stuff/translated-guides/karaoke-song-lyrics/%E9%A6%AC%E9%B9%BF%E3%81%BF%E3%81%9F%E3%81%84-baka-mitai-lyrics/",
+    "longDesc": ""
   }
 ]

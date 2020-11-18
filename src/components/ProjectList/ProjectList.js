@@ -12,28 +12,64 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
+// custom flip animation
+/* 
+  usage:
+  <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical">
+    <YOUR_FRONT_CCOMPONENT>
+      This is the front of the card.
+      <button onClick={this.handleClick}>Click to flip</button>
+    </YOUR_FRONT_CCOMPONENT>
+
+    <YOUR_BACK_COMPONENT>
+      This is the back of the card.
+      <button onClick={this.handleClick}>Click to flip</button>
+    </YOUR_BACK_COMPONENT>
+  </ReactCardFlip>
+*/
+import ReactCardFlip from 'react-card-flip';
+
 function MyCard(props) {
-  const { header, about, imgSrc, iconSrc, link, madeAtEvent, eventLink,  } = props
-  console.log(iconSrc)
+  const { header, about, longDesc, imgSrc, iconSrc, link, madeAtEvent, eventLink,  } = props
+  const [isFlipped, setIsFlipped] = React.useState(false);
+  
   return (
     <Card>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt={about}
-          height="200"
-          image={imgSrc}
-          title={about}
-        />
-        <CardContent>
+      
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+        <CardActionArea
+          onMouseEnter={() => setIsFlipped(true)}
+        >
+          <CardMedia
+            component="img"
+            alt={about}
+            height="200"
+            image={imgSrc}
+            title={about}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {header}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {about}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+
+        <CardContent
+          onMouseLeave={() => setIsFlipped(false)}
+        >
           <Typography gutterBottom variant="h5" component="h2">
             {header}
           </Typography>
           <Typography variant="body2" component="p">
             {about}
           </Typography>
+          <Button variant="contained" onClick={() => setIsFlipped(false)}>Click to Flip</Button>
         </CardContent>
-      </CardActionArea>
+      </ReactCardFlip>
+        
       <CardActions style={{justifyContent: 'center'}}>
         {madeAtEvent &&
           <Button size="small" color="primary" href={eventLink} target="_blank" rel="noopener">
@@ -89,6 +125,7 @@ export default function CenteredGrid(props) {
                 iconSrc={obj.iconSrc}
                 madeAtEvent={obj.madeAtEvent}
                 eventLink={obj.eventLink}
+                longDesc={obj.longDesc}
               />
             </Grid>
           )
