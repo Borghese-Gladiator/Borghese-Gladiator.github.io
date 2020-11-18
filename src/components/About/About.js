@@ -48,7 +48,7 @@ export default function AboutSection({id, aboutText, currentStatusText }) {
       <Divider>Hey there</Divider>
       <br />
       <Typography variant="h5" align="center" color="textPrimary" paragraph>
-        I'm {currentStatusText}
+        I'm Tim Shee, {currentStatusText}
       </Typography>
       <Container className={classes.aboutTextContainer}>
         <Typography variant="p" align="center" paragraph className={classes.aboutText}>
