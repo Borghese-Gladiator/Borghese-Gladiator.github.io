@@ -37,7 +37,8 @@ const useCardStyles = makeStyles((theme) => ({
   },
   icon: {
     height: 36,
-    width: 48
+    width: 48,
+    paddingRight: 5
   }
 }));
 
@@ -87,7 +88,7 @@ function MyCard(props) {
       <CardActions style={{justifyContent: 'center'}}>
         {madeAtEvent &&
           <Button size="small" color="primary" href={eventLink} target="_blank" rel="noopener">
-            {iconPath && <img src={iconPath} alt="icon of event" className={classes.icon} />} Event Info
+            {iconPath && <img src={iconPath} alt="icon of event" className={classes.icon} />}  Event Info
           </Button>
         }
         <Button size="small" color="primary" target="_blank" rel="noopener" href={link}>
