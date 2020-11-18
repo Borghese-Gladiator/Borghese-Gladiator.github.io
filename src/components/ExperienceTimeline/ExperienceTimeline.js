@@ -169,6 +169,7 @@ export default function ExperienceTimeline(props) {
               <Typography component="body">
                 I am on course to receive my Computer Science <strong>Bachelor's Degree</strong>
               </Typography>
+              <br />
             </CardContent>
           </Card>
         </TimelineItem>
