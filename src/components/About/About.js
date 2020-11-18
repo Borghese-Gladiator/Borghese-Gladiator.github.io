@@ -45,10 +45,10 @@ export default function AboutSection({id, aboutText, currentStatusText }) {
 
   return (
     <Container id={id} className={classes.root}>
-      <Divider>Hi there,</Divider>
+      <Divider>Hey there</Divider>
       <br />
       <Typography variant="h5" align="center" color="textPrimary" paragraph>
-        I'm currently {currentStatusText}
+        I'm {currentStatusText}
       </Typography>
       <Container className={classes.aboutTextContainer}>
         <Typography variant="p" align="center" paragraph className={classes.aboutText}>
