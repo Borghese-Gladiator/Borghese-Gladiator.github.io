@@ -1,2 +1,2 @@
-export const aboutText = ``
-export const currentStatusText = `I'm an incoming Dell EMC entry software engineer.`
+export const aboutText = `I'm a CS major senior graduating in May 2021 from UMass Amherst. I'm interested in linguistics, deep learning, and NLP, but my greatest passion is building web utilities to make life more fun.`
+export const currentStatusText = `an incoming Dell EMC entry software engineer.`

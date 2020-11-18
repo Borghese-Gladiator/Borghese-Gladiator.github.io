@@ -17,7 +17,7 @@ const Divider = ({ children }) => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  aboutContainer: {
+  root: {
     marginTop: "40px",
     padding: theme.spacing(10, 10, 10),
     textAlign: "center",
@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   aboutText: {
     fontSize: "calc(16px + 0.1vw)",
     whiteSpace: "pre-wrap",
+  },
+  aboutTextContainer: {
+    padding: theme.spacing(0, 20, 0)
   }
 }));
 
@@ -41,15 +44,17 @@ export default function AboutSection({id, aboutText, currentStatusText }) {
   const classes = useStyles();
 
   return (
-    <Container id={id} className={classes.aboutContainer}>
-      <Divider>Hey there</Divider>
-      <h3 className={classes.headerText}>I'm Tim</h3>
+    <Container id={id} className={classes.root}>
+      <Divider>Hi there,</Divider>
+      <br />
       <Typography variant="h5" align="center" color="textPrimary" paragraph>
-        {currentStatusText}
+        I'm currently {currentStatusText}
       </Typography>
-      <Typography variant="p" align="center" paragraph className={classes.aboutText}>
-        {aboutText}
-      </Typography>
+      <Container className={classes.aboutTextContainer}>
+        <Typography variant="p" align="center" paragraph className={classes.aboutText}>
+          {aboutText}
+        </Typography>
+      </Container>
     </Container>
   );
 }
