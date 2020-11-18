@@ -54,8 +54,11 @@ const LanguageSection = function(props) {
       <p style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Professional working proficiency</p>
       <ScaleBar value={80} />
       <h3>Japanese (日本語)</h3>
-      <p style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Elementary proficiency</p>
+      <p style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Proficient</p>
       <ScaleBar value={60} />
+      <h3>Spanish (Español)</h3>
+      <p style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Elementary proficiency</p>
+      <ScaleBar value={30} />
     </Container>
     
   );
