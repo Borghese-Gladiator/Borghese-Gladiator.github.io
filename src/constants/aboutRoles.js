@@ -17,8 +17,8 @@ export const aboutRolesData = [
   {
     title: "FrontEnd",
     icon: () => { return <DeveloperModeIcon style={{fontSize: 80}} /> },
-    titleText: "FrontEnd Dev",
-    desc: "I value how frontend showcases my work with clean state management and fast load times",
+    titleText: "Front End Dev",
+    desc: "I value how front end showcases my work with clean state management and fast load times",
     useDesc: "Web & Mobile Apps",
     toolNamesList: [
       "React", "Angular", "CSS3 & Flexbox"
