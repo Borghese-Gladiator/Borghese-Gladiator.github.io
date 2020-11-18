@@ -11,7 +11,7 @@ export const aboutRolesData = [
     desc: "I love how DevOps automates QA and Release Engineering, but still pushes quality code.",
     useDesc: "CI/CD Infrastructure",
     toolNamesList: [
-      "Jenkins", "GitLab", "Docker", "Kubernetes", "Vagrant"
+      "Jenkins", "GitLab", "Docker"
     ]
   },
   {
@@ -21,7 +21,7 @@ export const aboutRolesData = [
     desc: "I value how frontend showcases my work with clean state management and fast load times",
     useDesc: "Web & Mobile Apps",
     toolNamesList: [
-      "React", "Vue.js", "CSS3 & Flexbox", "Next & Nuxt", "Flutter"
+      "React", "Angular", "CSS3 & Flexbox"
     ]
   },
   {
@@ -31,7 +31,7 @@ export const aboutRolesData = [
     desc: "I prioritize using Agile in projects for efficiency, accountability, and to progress towards SMART goals (even in groups).",
     useDesc: "Agile in Practice",
     toolNamesList: [
-      "Jira", "Scrum for Trello", "Kanban", "Slack Bots", "Sprint Review"
+      "Jira", "Scrum for Trello", "Kanban"
     ]
   }
 ]
