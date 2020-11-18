@@ -12,7 +12,8 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 const useStyles = makeStyles((theme) => ({
   footerRoot: {
     minHeight: "300px",
-    color: "rgb(3, 83, 164)",
+    // color: "rgb(3, 83, 164)",
+    color: "white",
     background: "linear-gradient(rgb(15, 163, 177), rgb(181, 226, 250))",
     display: "flex",
     justifyContent: "center",
@@ -64,7 +65,7 @@ export default function Footer() {
     <footer className={classes.footerRoot}>
         <div style={{textAlign: "center"}}>
         <CallToActionIcon style={{fontSize:"60px"}} />
-        <h2>Learn, Apply, & Repeat<br /> Best way to solve problems</h2>
+        <h2>Learn, Apply, & Repeat<br /> The best way to solve problems</h2>
         <div className={classes.listRoot}>
           {
             iconList.map((obj, idx) => {
