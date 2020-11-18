@@ -98,24 +98,20 @@ export default function AboutRoles(props) {
 
   return (
     <Container id={id} className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Grid container justify="center" spacing={1}>
-            {aboutRolesData.map((obj, idx) => (
-              <Grid key={`${obj.title} ${idx}`} item>
-                <RecipeReviewCard
-                  title={obj.title}
-                  icon={obj.icon}
-                  titleText={obj.titleText}
-                  desc={obj.desc}
-                  useDesc={obj.useDesc}
-                  toolNamesList={obj.toolNamesList}
-                  style={{background: "#fff"}}
-                />
-              </Grid>
-            ))}
+      <Grid container justify="center" spacing={4}>
+        {aboutRolesData.map((obj, idx) => (
+          <Grid key={`${obj.title} ${idx}`} item>
+            <RecipeReviewCard
+              title={obj.title}
+              icon={obj.icon}
+              titleText={obj.titleText}
+              desc={obj.desc}
+              useDesc={obj.useDesc}
+              toolNamesList={obj.toolNamesList}
+              style={{background: "#fff"}}
+            />
           </Grid>
-        </Grid>
+        ))}
       </Grid>
     </Container>
   );
