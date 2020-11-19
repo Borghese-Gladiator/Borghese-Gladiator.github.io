@@ -4,13 +4,15 @@ import Landing from '../components/Landing'
 import About from '../components/About'
 import AboutRoles from '../components/AboutRoles'
 import ExperienceTimeline from '../components/ExperienceTimeline'
-import ProjectList from '../components/ProjectList'
+import ProjectList from '../components/ProjectList';
+import SkillsList from '../components/Skills';
 import Language from '../components/Language'
 
 import { currentStatusText, aboutText } from '../constants/about'
 import { aboutRolesData } from '../constants/aboutRoles'
 import { experienceData } from '../constants/experience'
 import { projectData } from '../constants/projects'
+import { skillsData } from '../constants/skills';
 
 import './HomePage.css'
 
@@ -31,6 +33,9 @@ export default function HomePage() {
       </ScrollAnimation>
       <ScrollAnimation animateIn="fadeIn">
         <ProjectList id="projects" projectData={projectData} />
+      </ScrollAnimation>
+      <ScrollAnimation animateIn="fadeIn">
+        <SkillsList id="skills" skillsData={skillsData} />
       </ScrollAnimation>
       <ScrollAnimation animateIn="fadeIn">
         <Language id="languages" />
