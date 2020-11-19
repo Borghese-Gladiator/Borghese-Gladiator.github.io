@@ -131,7 +131,6 @@ export default function SkillsList(props) {
               <SkillsCard
                 className={classes.paper}
                 titleImg={obj.titleImg}
-                titleIcon={obj.titleIcon}
                 score={obj.score}
                 nestedSkills={obj.nestedSkills}
               />
