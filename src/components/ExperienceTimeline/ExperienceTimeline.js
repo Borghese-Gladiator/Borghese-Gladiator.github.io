@@ -154,6 +154,10 @@ export default function ExperienceTimeline(props) {
           key="001"
           dateText="May 2021"
           dateInnerStyle={{ background: '#32a852' }}
+          bodyContainerStyle={{
+            borderRadius: '8px',
+            boxShadow: '5px 10px 18px #888888',
+          }}
           style={{ color: '#32a852' }}
         >
           <Card className={classes.root}>
