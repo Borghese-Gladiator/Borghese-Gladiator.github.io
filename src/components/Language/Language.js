@@ -45,19 +45,18 @@ function ScaleBar({value}) {
 const LanguageSection = function(props) {
   const { id } = props
   return(
-    <Container id={id} style={{paddingTop:"35px"}}>
-      <h1 style={{textAlign: "center"}}>LANGUAGES</h1>
-      <h3>English</h3>
-      <p style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Native</p>
+    <Container id={id} style={{marginBottom:"70px"}}>
+      <h3 style={{marginBottom: 0}}>English</h3>
+      <span style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Native</span>
       <ScaleBar value={100} />
-      <h3>Chinese (简体中文)</h3>
-      <p style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Professional working proficiency</p>
+      <h3 style={{marginBottom: 0}}>Chinese (简体中文)</h3>
+      <span style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Professional working proficiency</span>
       <ScaleBar value={80} />
-      <h3>Japanese (日本語)</h3>
-      <p style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Proficient</p>
+      <h3 style={{marginBottom: 0}}>Japanese (日本語)</h3>
+      <span style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Proficient</span>
       <ScaleBar value={60} />
-      <h3>Spanish (Español)</h3>
-      <p style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Elementary proficiency</p>
+      <h3 style={{marginBottom: 0}}>Spanish (Español)</h3>
+      <span style={{fontSize:"15px", color: "gray", paddingTop:"0px"}}>Elementary proficiency</span>
       <ScaleBar value={30} />
     </Container>
     
