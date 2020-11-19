@@ -1,4 +1,3 @@
-import JSImg from '../img/js_800x800.jpg';
 // logo for three languages
 import JSLogoImg from '../img/js-logo.png';
 import PythonImg from '../img/python_1.png';

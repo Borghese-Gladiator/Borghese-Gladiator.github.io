@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 // card components
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
 // TilebarGridList component
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -84,7 +83,7 @@ const useCardStyles = makeStyles((theme) => ({
 
 function SkillsCard(props) {
   const classes = useCardStyles();
-  const { titleImg, titleIcon, score, nestedSkills } = props;
+  const { titleImg, score, nestedSkills } = props;
   return (
     <Card className={classes.root}>
       <Container style={{ paddingTop: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
