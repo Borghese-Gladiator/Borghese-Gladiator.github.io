@@ -12,6 +12,13 @@ import ResumePDF from '../../pdf/Current_Resume.pdf'
 import ReactTypingEffect from 'react-typing-effect'
 
 const useStyles = makeStyles((theme) => ({
+  parallax: {
+    /* Create the parallax scrolling effect */
+    backgroundAttachment: 'fixed',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+  },
   heroContent: {
     padding: theme.spacing(35, 0, 60),
   },
@@ -38,7 +45,7 @@ export default function Album(props) {
   const githubButton = githubArrowShown ? <>View GitHub <ArrowRightAltIcon /></> : <>View GitHub</>
 
   return (
-    <div id={id} style={{ backgroundImage: `url(${MyBackgroundImg})` }}>
+    <div id={id} className={classes.parallax} style={{ backgroundImage: `url(${MyBackgroundImg})` }}>
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
           <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
