@@ -1,5 +1,5 @@
 # Borghese-Gladiator.github.io
-- Below domain name just expired (have deleted Namecheap record)
+- Below domain name just expired (have deleted Namecheap record & removed CNAME from gh-pages branch)
   - Timothy Shee's portfolio site at [timothyshee.me](timothyshee.me)
   * Namecheap - hosts the site timothyshee.me
   * Bought domain name with GitHub Student Developer free 1 year domain name.
