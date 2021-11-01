@@ -1,7 +1,8 @@
 # Borghese-Gladiator.github.io
-Timothy Shee's portfolio site at [timothyshee.me](timothyshee.me)
-* Namecheap - hosts the site timothyshee.me
-* Bought domain name with GitHub Student Developer free 1 year domain name.
+- Below domain name just expired (have deleted Namecheap record)
+  - Timothy Shee's portfolio site at [timothyshee.me](timothyshee.me)
+  * Namecheap - hosts the site timothyshee.me
+  * Bought domain name with GitHub Student Developer free 1 year domain name.
 
 ## Author
 Timothy Shee
