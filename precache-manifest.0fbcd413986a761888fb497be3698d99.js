@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5464e1e11d5452913fb81034a75e00ac",
+    "revision": "807a25dd91bd89f2e4dabd055ecaac39",
     "url": "/index.html"
   },
   {
-    "revision": "aa180ea4eddb9bd65485",
-    "url": "/static/css/2.ab965100.chunk.css"
+    "revision": "8bcc1d4a22209cb0e9dd",
+    "url": "/static/css/2.e89b4aa9.chunk.css"
   },
   {
-    "revision": "14f2bd67200db638ae64",
-    "url": "/static/css/main.033b9120.chunk.css"
+    "revision": "38e5adff65a0c8860d59",
+    "url": "/static/css/main.dbfca712.chunk.css"
   },
   {
-    "revision": "aa180ea4eddb9bd65485",
-    "url": "/static/js/2.68cf5cfd.chunk.js"
+    "revision": "8bcc1d4a22209cb0e9dd",
+    "url": "/static/js/2.f0baf7a7.chunk.js"
   },
   {
     "revision": "1f4e5274478b14df53f481895eac4de6",
-    "url": "/static/js/2.68cf5cfd.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.f0baf7a7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "14f2bd67200db638ae64",
-    "url": "/static/js/main.bf61c9dd.chunk.js"
+    "revision": "38e5adff65a0c8860d59",
+    "url": "/static/js/main.900bed21.chunk.js"
   },
   {
     "revision": "ecab03fac402545509f1",
@@ -80,16 +80,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Precious.3a4ebe70.eot"
   },
   {
-    "revision": "974e10be1d9dd31e956a1e30bc71df1c",
-    "url": "/static/media/Precious.974e10be.svg"
-  },
-  {
     "revision": "a7929d7774aa6513328a15cde0992953",
     "url": "/static/media/Precious.a7929d77.woff2"
   },
   {
     "revision": "eb15ee2de9e30c6897c7bf96e495f21d",
     "url": "/static/media/Precious.eb15ee2d.woff"
+  },
+  {
+    "revision": "fe9d12295ea6156a96e14dc022eeac56",
+    "url": "/static/media/Precious.fe9d1229.svg"
   },
   {
     "revision": "bd948c3028be74b2c9a9974a806c2930",
@@ -102,6 +102,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "ba9f6ee27339ab39638c95eff8fb6130",
     "url": "/static/media/community-hero.ba9f6ee2.png"
+  },
+  {
+    "revision": "32a48ad563caef8837cef573ba91f593",
+    "url": "/static/media/dell_emc_logo.32a48ad5.jpg"
   },
   {
     "revision": "7e482d7f09beab709b9b882ded9891a6",
