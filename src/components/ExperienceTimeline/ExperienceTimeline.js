@@ -140,6 +140,7 @@ const iconMapping = {
   'PSH':"https://upload.wikimedia.org/wikipedia/commons/2/2f/PowerShell_5.0_icon.png",
   'VirtualBox':"https://www.virtualbox.org/graphics/vbox_logo2_gradient.png",
   'React':"https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+  'Selenium': "https://www.selenium.dev/images/selenium_4_logo.png",
 }
 
 export default function ExperienceTimeline(props) {

@@ -3,8 +3,46 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import RSASecurityLogoImg from '../img/RSA_Security_Logo.png'
 import AvidLogoImg from '../img/avid_logo.png'
+import DellEMCImg from '../img/dell_emc_logo.jpg';
 
 export const experienceData = [
+  {
+    company: "Dell EMC",
+    title: "Software Engineer 1",
+    dateText: "May 2021 – Present",
+    location: "Hopkinton, MA",
+    skills: ['Java', 'Python', 'Git', 'Jenkins', 'Agile/Jira', 'Selenium', 'Linux'],
+    teamInfo:"Analytics Team - CloudIQ",
+    summary: "Completed both data engineering and testing automation tasks",
+    materialUIDesc: () => {
+      return (
+        <div>
+          <Typography paragraph>May 2021 - Present</Typography>
+          <Typography paragraph>
+            Migrated time series similarity microservice from R to Python for license compliance and this microservice enables customers to troubleshoot resources in contention. 
+            <Typography paragraph>
+            Investigated legacy R microservice and documented both existing functionality and interconnection to other microservices in Confluence
+            </Typography>
+            <Typography paragraph>
+            Created new Python common library for time series similarity and deprecated legacy R microservice to reduce CPU/memory usage on Pivotal Cloud Foundry (PCF) and integrated new common library into existing Python microservice.
+            </Typography>
+            <Typography paragraph>
+            Validated new Python common library results against legacy R microservice using Production performance data of 1000 systems. Aggregated data with Pandas, saved reports to Elasticsearch, and summarized with Kibana
+            </Typography>
+          </Typography>
+          <Typography paragraph>
+          Designed and implemented an intelligent test automation system to re-configure and re-start all required data processors when it detects any microservice failures due to environmental issues. This is written in Python, Selenium on a Jenkins server.
+          </Typography>
+          <Typography paragraph>
+          Maintained E2E integration test framework built with Java, Maven, and Selenium.
+          </Typography>
+        </div>
+      )
+    },
+    desc: ``,
+    experienceImage: DellEMCImg,
+    color: "#1c8aff",
+  },
   {
     company: "RSA Security",
     title: "Software Engineering Intern",
