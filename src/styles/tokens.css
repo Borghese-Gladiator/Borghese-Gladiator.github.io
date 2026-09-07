@@ -1,0 +1,68 @@
+/*
+  CSS mirror of src/design/tokens.ts.
+  Tailwind v4 turns each @theme variable into a utility class.
+  Example: --color-accent produces bg-accent, text-accent, border-accent.
+*/
+
+@theme {
+  --color-ink-50: #f6f6f7;
+  --color-ink-100: #e3e3e6;
+  --color-ink-200: #c6c7cd;
+  --color-ink-300: #9fa1ab;
+  --color-ink-400: #74767f;
+  --color-ink-500: #585a63;
+  --color-ink-600: #43444b;
+  --color-ink-700: #33343a;
+  --color-ink-800: #212227;
+  --color-ink-900: #141519;
+  --color-ink-950: #0a0b0d;
+
+  --color-accent-300: #8fd0ff;
+  --color-accent-400: #4fb2ff;
+  --color-accent-500: #1f92f5;
+  --color-accent-600: #0f74cc;
+  --color-accent-700: #0d5a9e;
+
+  --color-warm-400: #ffb35c;
+  --color-warm-500: #f5912b;
+  --color-warm-600: #cc6f14;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+  Semantic variables. Components use these, not the raw palette.
+  The values change with the color mode.
+*/
+:root {
+  --color-background: var(--color-ink-50);
+  --color-surface: #ffffff;
+  --color-border: var(--color-ink-200);
+  --color-text: var(--color-ink-900);
+  --color-text-muted: var(--color-ink-500);
+  --color-accent: var(--color-accent-600);
+  --color-accent-contrast: #ffffff;
+
+  --duration-fast: 120ms;
+  --duration-base: 220ms;
+  --duration-slow: 420ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--color-ink-950);
+    --color-surface: var(--color-ink-900);
+    --color-border: var(--color-ink-700);
+    --color-text: var(--color-ink-50);
+    --color-text-muted: var(--color-ink-300);
+    --color-accent: var(--color-accent-400);
+    --color-accent-contrast: var(--color-ink-950);
+  }
+}
