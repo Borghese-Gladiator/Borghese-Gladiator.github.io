@@ -29,12 +29,20 @@ export function HeroScene() {
     <>
       <ambientLight intensity={0.4} />
       <directionalLight position={[4, 6, 4]} intensity={2} color={colors.keyLight} />
-      <directionalLight position={[-6, -2, -4]} intensity={0.6} color={colors.fillLight} />
+      <directionalLight
+        position={[-6, -2, -4]}
+        intensity={0.6}
+        color={colors.fillLight}
+      />
 
       <Float speed={reducedMotion ? 0 : 1.2} rotationIntensity={0.3} floatIntensity={0.6}>
         <mesh ref={mesh}>
           <torusKnotGeometry args={[1.1, 0.35, 180, 32]} />
-          <meshStandardMaterial color={colors.material} metalness={0.6} roughness={0.25} />
+          <meshStandardMaterial
+            color={colors.material}
+            metalness={0.6}
+            roughness={0.25}
+          />
         </mesh>
       </Float>
 

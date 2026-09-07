@@ -38,7 +38,11 @@ export function SceneCanvas({
   const colors = useSceneColors();
 
   return (
-    <div className={cn('relative h-full w-full', className)} aria-label={label} role="img">
+    <div
+      className={cn('relative h-full w-full', className)}
+      aria-label={label}
+      role="img"
+    >
       <Canvas
         dpr={[1, 2]}
         frameloop={reducedMotion ? 'demand' : 'always'}
@@ -48,7 +52,9 @@ export function SceneCanvas({
           gl.setClearAlpha(paintBackground ? 1 : 0);
         }}
       >
-        {paintBackground ? <color attach="background" args={[colors.background]} /> : null}
+        {paintBackground ? (
+          <color attach="background" args={[colors.background]} />
+        ) : null}
         <Suspense fallback={null}>
           {children}
           <Preload all />
