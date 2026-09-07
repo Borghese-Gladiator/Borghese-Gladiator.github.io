@@ -1,47 +1,29 @@
-import { lazy, Suspense } from 'react';
-import { Button, Card, Container, Section, Text } from './design/components';
-
-/** Keep the WebGL bundle out of the first chunk. */
-const Hero3D = lazy(() => import('./sections/Hero3D'));
+import { Nav } from './components/Nav';
+import { About } from './sections/About';
+import { Contact } from './sections/Contact';
+import { Experience } from './sections/Experience';
+import { Hero } from './sections/Hero';
+import { Projects } from './sections/Projects';
+import { Skills } from './sections/Skills';
 
 export default function App() {
   return (
-    <main>
-      <section className="relative h-[80vh] min-h-[520px] w-full">
-        <Suspense fallback={<div className="h-full w-full bg-[var(--color-background)]" />}>
-          <Hero3D />
-        </Suspense>
-
-        <Container className="pointer-events-none absolute inset-0 flex flex-col justify-center">
-          <h1 className="max-w-xl text-5xl font-semibold tracking-tight">
-            Timothy Shee
-          </h1>
-          <Text muted className="mt-4 max-w-md">
-            Software engineer. This page is the shell. Replace this copy.
-          </Text>
-          <div className="pointer-events-auto mt-8 flex gap-3">
-            <Button>View work</Button>
-            <Button variant="secondary">Contact</Button>
-          </div>
-        </Container>
-      </section>
-
-      <Section title="Work">
-        <div className="grid gap-6 sm:grid-cols-2">
-          <Card>
-            <h3 className="text-lg font-medium">Project one</h3>
-            <Text muted className="mt-2">
-              Replace this card with a real project.
-            </Text>
-          </Card>
-          <Card>
-            <h3 className="text-lg font-medium">Project two</h3>
-            <Text muted className="mt-2">
-              Replace this card with a real project.
-            </Text>
-          </Card>
-        </div>
-      </Section>
-    </main>
+    <>
+      <a
+        href="#about"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-20 focus:rounded-md focus:bg-[var(--color-surface)] focus:px-4 focus:py-2"
+      >
+        Skip to the content
+      </a>
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+      </main>
+      <Contact />
+    </>
   );
 }
