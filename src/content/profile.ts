@@ -8,7 +8,7 @@ export const profile = {
   name: 'Timothy Shee',
   roles: ['Full stack developer.', 'DevOps engineer.', 'NLP enthusiast.'],
   quote: {
-    text: 'The secret to getting ahead is getting started.',
+    text: 'The secret of getting ahead is getting started.',
     author: 'Mark Twain',
   },
   footerTagline: ['Learn, apply, and repeat.', 'The best way to solve problems.'],
