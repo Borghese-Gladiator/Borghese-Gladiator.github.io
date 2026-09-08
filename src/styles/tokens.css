@@ -27,19 +27,6 @@
   --color-warm-500: #f5912b;
   --color-warm-600: #cc6f14;
 
-  --color-tag-amber: #b45309;
-  --color-tag-orange: #c2410c;
-  --color-tag-rose: #be123c;
-  --color-tag-fuchsia: #a21caf;
-  --color-tag-violet: #6d28d9;
-  --color-tag-indigo: #4338ca;
-  --color-tag-blue: #1d4ed8;
-  --color-tag-sky: #0369a1;
-  --color-tag-cyan: #0e7490;
-  --color-tag-teal: #0f766e;
-  --color-tag-emerald: #047857;
-  --color-tag-lime: #4d7c0f;
-
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
@@ -55,6 +42,24 @@
   The values change with the color mode.
 */
 :root {
+  /*
+    The tag hues live here and not in @theme. Tailwind drops an @theme
+    variable that no CSS refers to, and `Tag` builds the variable name in
+    JavaScript, which Tailwind cannot see. A plain :root block always ships.
+  */
+  --color-tag-amber: #b45309;
+  --color-tag-orange: #c2410c;
+  --color-tag-rose: #be123c;
+  --color-tag-fuchsia: #a21caf;
+  --color-tag-violet: #6d28d9;
+  --color-tag-indigo: #4338ca;
+  --color-tag-blue: #1d4ed8;
+  --color-tag-sky: #0369a1;
+  --color-tag-cyan: #0e7490;
+  --color-tag-teal: #0f766e;
+  --color-tag-emerald: #047857;
+  --color-tag-lime: #4d7c0f;
+
   --color-background: var(--color-ink-50);
   --color-surface: #ffffff;
   --color-border: var(--color-ink-200);

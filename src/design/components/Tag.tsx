@@ -25,8 +25,8 @@ export function Tag({ name, className }: TagProps) {
       )}
       style={{
         color: hue,
-        backgroundColor: `color-mix(in srgb, ${hue} 14%, transparent)`,
-        borderColor: `color-mix(in srgb, ${hue} 35%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${hue} 20%, transparent)`,
+        borderColor: `color-mix(in srgb, ${hue} 45%, transparent)`,
       }}
     >
       {name}

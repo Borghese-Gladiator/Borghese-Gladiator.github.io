@@ -55,18 +55,37 @@ export function Disclosure({
             aria-controls={regionId}
             aria-label={label}
             onClick={() => setPinned((was) => !was)}
-            className="flex w-full cursor-pointer items-baseline justify-between gap-3 text-left"
+            className={cn(
+              'group flex w-full cursor-pointer items-center justify-between gap-4 rounded-md text-left',
+              'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)]',
+            )}
           >
             <span>{heading}</span>
             <span
               aria-hidden="true"
               className={cn(
-                'shrink-0 text-sm text-[var(--color-text-muted)]',
-                'transition-transform duration-[var(--duration-base)]',
-                open && 'rotate-180',
+                'flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2',
+                'transition-[color,border-color,background-color] duration-[var(--duration-base)]',
+                'group-focus-visible:border-[var(--color-accent)]',
+                open
+                  ? 'border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-accent)_15%,transparent)] text-[var(--color-accent)]'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]',
               )}
             >
-              ▾
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={cn(
+                  'h-5 w-5 transition-transform duration-[var(--duration-base)] ease-(--ease-out-soft)',
+                  open && 'rotate-180',
+                )}
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
             </span>
           </button>
         </h3>
