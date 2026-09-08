@@ -10,6 +10,22 @@
       name="description"
       content="Portfolio of Timothy Shee, a software engineer who works on full stack development, DevOps, and NLP."
     />
+    <script>
+      // Paint the stored mode before the first frame, or the page flashes the
+      // other one. The store in src/theme/theme.ts owns this key.
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var dark =
+            stored === 'dark' ||
+            (stored !== 'light' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

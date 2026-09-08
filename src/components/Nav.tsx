@@ -3,6 +3,7 @@ import { cn } from '../design/cn';
 import { sections } from '../content/sections';
 import { profile } from '../content/profile';
 import { useActiveSection } from '../hooks/useActiveSection';
+import { ThemeToggle } from './ThemeToggle';
 
 const IDS = sections.map((section) => section.id);
 
@@ -18,8 +19,8 @@ export function Nav() {
         >
           {profile.name}
         </a>
-        <nav aria-label="Sections" className="min-w-0">
-          <ul className="flex items-center gap-1 overflow-x-auto sm:gap-2">
+        <nav aria-label="Sections" className="min-w-0 grow">
+          <ul className="flex items-center gap-1 overflow-x-auto sm:justify-end sm:gap-2">
             {sections.map((section) => (
               <li key={section.id}>
                 <a
@@ -39,6 +40,7 @@ export function Nav() {
             ))}
           </ul>
         </nav>
+        <ThemeToggle />
       </Container>
     </header>
   );

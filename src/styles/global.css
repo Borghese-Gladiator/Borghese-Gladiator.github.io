@@ -6,6 +6,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* The scrollbar and the form controls follow the choice, not the system. */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   background-color: var(--color-background);

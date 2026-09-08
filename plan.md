@@ -1,110 +1,92 @@
-# Plan: add color, flair, and reveal on demand
+# Plan: a theme control in the nav
 
 ## Brief
 
-The site reads drab for 3 reasons. Each one gets a fix here.
+The site reads `prefers-color-scheme` and offers no choice. A visitor who
+wants the other mode has to change the setting of the operating system.
 
-| Cause                                                                             | Fix                                                             |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| One accent hue does all the work. The `warm` ramp in `tokens.ts` has no importer. | An 8 hue tag palette. A chip takes its color from its own name. |
-| The page is one flat fill, edge to edge.                                          | A fixed wash of 3 soft radial gradients behind the whole page.  |
-| The hero is one centered object on black.                                         | An aurora shader backdrop and 250 instanced shapes.             |
+Add a control at the top right of the nav. It holds 3 states, not 2, because
+"follow the system" is the current behavior and must survive.
 
-Two behavior changes come with it:
+| State  | Result                                                         |
+| ------ | -------------------------------------------------------------- |
+| System | Follow `prefers-color-scheme`, and follow a later change to it |
+| Light  | Light, whatever the system says                                |
+| Dark   | Dark, whatever the system says                                 |
 
-- A chip carries the same color everywhere, so Python is the same hue in the
-  timeline, in the project cards, and in the skill groups.
-- The timeline and the project cards hold their detail back. A pointer opens a
-  card on hover. A click pins it open. The keyboard opens it with Enter.
+One button cycles System, Light, Dark. The choice persists in
+`localStorage`.
+
+## The problem to solve first
+
+3 things read the color mode and they must agree:
+
+1. The CSS tokens, through a media query.
+2. `useSceneColors`, through `matchMedia` in React.
+3. The new control.
+
+A media query cannot read a stored choice, so the CSS has to key off an
+attribute instead.
 
 ## Changes
 
-### The tag palette
+### The attribute, not the media query
 
-- `tokens.ts` gains `tagHues` and a `tag` record with a light value and a dark
-  value for each of the 8 hues.
-- `tokens.css` mirrors them as `--tag-amber` and so on, once for light and
-  once for dark.
-- `src/design/tagHue.ts` maps a tag name to a hue. A language gets an explicit
-  hue. Every other name hashes to one of the 8. The same name always returns
-  the same hue, so the color is stable across sections and across reloads.
-- `src/design/components/Tag.tsx` renders the chip. It reads one hue variable
-  and derives the fill and the border with `color-mix`.
-- `Badge` stays for a chip that carries no technology name.
+- `tokens.css` moves the dark values from
+  `@media (prefers-color-scheme: dark)` to `:root[data-theme='dark']`.
+- `index.html` gains a small inline script that sets `data-theme` before the
+  first paint. Without it the page paints light and then flips.
+- The script is the only reason the media query can go. The site is a React
+  page, so a visitor with no JavaScript sees nothing at all. A dark fallback
+  for that case would protect nobody, and keeping the media query would mean 3
+  copies of the same token block.
+- `global.css` sets `color-scheme` from the attribute, so the scrollbar and
+  the form controls follow the choice.
 
-### The page wash
+### One source of truth
 
-`global.css` paints 3 radial gradients on a fixed `body::before` layer, at 8
-to 10 percent of the accent, the violet, and the teal. The layer sits behind
-the content and takes no pointer events.
+`src/theme/theme.ts` holds a small store:
 
-### The section accent
+- `getChoice`, `setChoice`, `subscribe`, `resolve`.
+- `resolve` returns light or dark. It reads `matchMedia` only while the choice
+  is System.
+- `useThemeChoice` and `useColorMode` read it with `useSyncExternalStore`.
 
-`Section` gains an `accent` prop. It draws a short colored rule above the
-title. About is violet, Experience is sky, Projects is amber, Skills is
-emerald.
+The store sits outside React, not in a context, because `useSceneColors` runs
+inside the `<Canvas>` tree. That tree is a separate reconciler, so a context
+above it is not reliable. A module store is the same value for every tree.
 
-### The hero scene
+`useSceneColors` reads `useColorMode` from the store rather than calling
+`matchMedia` itself. The scene then follows an explicit choice.
 
-`HeroScene.tsx` holds both parts, because they are one scene.
+### The control
 
-- **Aurora.** One large plane with a fragment shader. 3 blobs move on
-  independent sine paths and mix into the base color. A dither term removes
-  the banding. The colors come from `useSceneColors`.
-- **Swarm.** `<Instances>` with 250 members. Each one takes a position, a
-  scale, and a color from the tag palette, so the hero and the chips share one
-  set of hues. The group rotates and bobs, which is 1 matrix update per frame
-  rather than 250.
-- **Parallax.** The pointer moves the camera. The lerp mutates the camera and
-  allocates nothing inside the frame loop.
-- Reduced motion stops the group, the aurora clock, and the parallax.
+`src/components/ThemeToggle.tsx`. A circled icon button that matches the
+reveal control: a sun, a moon, or a monitor. The label names the state and the
+next state, so a screen reader announces both.
 
-Cost: 2 draw calls.
-
-### Reveal on demand
-
-`src/design/components/Disclosure.tsx`:
-
-- The trigger is a `button` with `aria-expanded` and `aria-controls`.
-- The region animates with `grid-template-rows` from `0fr` to `1fr`.
-- The region takes `inert` when it is closed, so a screen reader and the Tab
-  key skip the hidden text.
-- `open` is true when the card is pinned or when a fine pointer is over it.
-  A coarse pointer, which means a phone, only pins.
-
-`Experience` and `Projects` both use it. The summary and the chips stay
-visible. The bullet list and the long description hide until the visitor asks.
-
-### Layering
-
-Move `useMediaQuery` from `src/three/hooks/` to `src/hooks/`. The design system
-needs it and must not import from `src/three/`.
+`Nav` puts it at the right end, after the section list. The section list
+already shrinks and scrolls on a phone, so the button keeps its size.
 
 ## Tests
 
 ### Unit
 
-- `tagHue` returns the explicit hue for a language, returns the same hue for
-  the same name twice, and returns a hue from the list for an unknown name.
-- `Tag` sets the hue variable for the name that it renders.
-- `Disclosure` reports `aria-expanded` false, then true after a click, and
-  marks the region `inert` only while it is closed.
-- `Experience` renders one trigger per role, and opens one role on a click.
-- `Projects` links only a project that has a link.
+- `resolve` returns the stored choice, and reads the system only for System.
+- `setChoice` writes `data-theme` on the root element.
+- `setChoice` survives a `localStorage` that throws, which is a private
+  window.
+- `ThemeToggle` cycles System, Light, Dark, System on 3 clicks.
 
 ### Manual
 
 Run `npm run dev`, then in the browser:
 
-1. Load `/`. Confirm the aurora moves and the shapes drift.
-2. Move the mouse across the hero. Confirm the camera follows and lags.
-3. Read the `r3f-perf` HUD. Confirm 2 calls and 60 fps.
-4. Find Python in the timeline and in Skills. Confirm both chips match.
-5. Hover a timeline role. Confirm the bullets open, and close on exit.
-6. Click a role. Confirm it stays open, and closes on a second click.
-7. Tab to a role. Confirm the outline shows and Enter opens it.
-8. Switch the OS to dark mode. Confirm the wash, the chips, and the scene
-   follow.
-9. Set the OS to reduce motion. Reload. Confirm the scene holds still.
-10. Set the window to 375px. Confirm no sideways scroll, and that a tap opens
-    a card.
+1. Click the control 3 times. Confirm the page turns light, dark, then back
+   to the system mode.
+2. Confirm the hero scene changes with the page, not only the DOM.
+3. Reload after a choice. Confirm the choice holds and the page does not
+   flash the other mode first.
+4. Set the choice to System, then change the OS mode. Confirm the page
+   follows without a reload.
+5. Confirm the control is at 375px wide and does not push the nav.

@@ -73,28 +73,31 @@
   --duration-slow: 420ms;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* A dark ground needs the light end of each hue. */
-    --color-tag-amber: #fbbf24;
-    --color-tag-orange: #fb923c;
-    --color-tag-rose: #fb7185;
-    --color-tag-fuchsia: #e879f9;
-    --color-tag-violet: #a78bfa;
-    --color-tag-indigo: #818cf8;
-    --color-tag-blue: #60a5fa;
-    --color-tag-sky: #38bdf8;
-    --color-tag-cyan: #22d3ee;
-    --color-tag-teal: #2dd4bf;
-    --color-tag-emerald: #34d399;
-    --color-tag-lime: #a3e635;
+/*
+  The dark values key off an attribute and not a media query, because a media
+  query cannot read a stored choice. An inline script in index.html writes the
+  attribute before the first paint. See src/theme/theme.ts.
+*/
+:root[data-theme='dark'] {
+  /* A dark ground needs the light end of each hue. */
+  --color-tag-amber: #fbbf24;
+  --color-tag-orange: #fb923c;
+  --color-tag-rose: #fb7185;
+  --color-tag-fuchsia: #e879f9;
+  --color-tag-violet: #a78bfa;
+  --color-tag-indigo: #818cf8;
+  --color-tag-blue: #60a5fa;
+  --color-tag-sky: #38bdf8;
+  --color-tag-cyan: #22d3ee;
+  --color-tag-teal: #2dd4bf;
+  --color-tag-emerald: #34d399;
+  --color-tag-lime: #a3e635;
 
-    --color-background: var(--color-ink-950);
-    --color-surface: var(--color-ink-900);
-    --color-border: var(--color-ink-700);
-    --color-text: var(--color-ink-50);
-    --color-text-muted: var(--color-ink-300);
-    --color-accent: var(--color-accent-400);
-    --color-accent-contrast: var(--color-ink-950);
-  }
+  --color-background: var(--color-ink-950);
+  --color-surface: var(--color-ink-900);
+  --color-border: var(--color-ink-700);
+  --color-text: var(--color-ink-50);
+  --color-text-muted: var(--color-ink-300);
+  --color-accent: var(--color-accent-400);
+  --color-accent-contrast: var(--color-ink-950);
 }
