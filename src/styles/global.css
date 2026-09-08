@@ -14,6 +14,35 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/*
+  The page wash. A flat fill reads as drab, so 3 soft gradients sit behind the
+  content. The layer is fixed, so it does not move with the scroll, and it
+  takes no pointer events.
+*/
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      60rem 40rem at 12% -8%,
+      color-mix(in srgb, var(--color-accent) 12%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      50rem 36rem at 92% 18%,
+      color-mix(in srgb, var(--color-tag-violet) 10%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      46rem 32rem at 48% 108%,
+      color-mix(in srgb, var(--color-tag-teal) 10%, transparent),
+      transparent 70%
+    );
+}
+
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;

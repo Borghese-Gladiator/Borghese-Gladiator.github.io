@@ -1,10 +1,10 @@
-import { Badge, Meter, Section, Text } from '../design/components';
+import { Meter, Section, Tag, Text } from '../design/components';
 import { skillsData } from '../content/skills';
 import { languageData } from '../content/languages';
 
 export function Skills() {
   return (
-    <Section id="skills" title="Skills">
+    <Section id="skills" title="Skills" accent="emerald">
       <div className="grid gap-10 md:grid-cols-3">
         {skillsData.map((group) => (
           <div key={group.name}>
@@ -23,7 +23,7 @@ export function Skills() {
             <ul className="mt-4 flex flex-wrap gap-2">
               {group.tools.map((tool) => (
                 <li key={tool}>
-                  <Badge>{tool}</Badge>
+                  <Tag name={tool} />
                 </li>
               ))}
             </ul>

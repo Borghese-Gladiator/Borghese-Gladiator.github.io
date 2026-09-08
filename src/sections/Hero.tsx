@@ -3,7 +3,7 @@ import { buttonClass, Container, Text } from '../design/components';
 import { profile } from '../content/profile';
 import { statusText } from '../content/about';
 import { useTypewriter } from '../hooks/useTypewriter';
-import { useMediaQuery } from '../three/hooks/useMediaQuery';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 /** Keep the WebGL bundle out of the first chunk. */
 const Hero3D = lazy(() => import('./Hero3D'));
@@ -14,6 +14,9 @@ const Hero3D = lazy(() => import('./Hero3D'));
  */
 const SCRIM =
   'linear-gradient(to right, var(--color-background), color-mix(in srgb, var(--color-background) 70%, transparent) 45%, transparent 80%)';
+
+/** The canvas ends on a straight edge. Fade it into the page. */
+const FADE = 'linear-gradient(to bottom, transparent 60%, var(--color-background))';
 
 function Scene() {
   return (
@@ -42,7 +45,7 @@ export function Hero() {
           <div
             aria-hidden="true"
             className="absolute inset-0"
-            style={{ backgroundImage: SCRIM }}
+            style={{ backgroundImage: `${FADE}, ${SCRIM}` }}
           />
         </>
       ) : null}
@@ -71,7 +74,7 @@ export function Hero() {
         </div>
 
         {wide ? null : (
-          <div className="mt-12 h-[280px] w-full">
+          <div className="mt-12 h-[280px] w-full overflow-hidden rounded-lg">
             <Scene />
           </div>
         )}

@@ -1,118 +1,110 @@
-# Plan: build the portfolio on the predecessor content
+# Plan: add color, flair, and reveal on demand
 
 ## Brief
 
-Port the content of `2021_Borghese-Gladiator.github.io` onto the new shell.
-Keep the content. Drop the implementation.
+The site reads drab for 3 reasons. Each one gets a fix here.
 
-What the predecessor did well: the section set and the copy. It has 7 sections
-and real text for each one.
+| Cause                                                                             | Fix                                                             |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| One accent hue does all the work. The `warm` ramp in `tokens.ts` has no importer. | An 8 hue tag palette. A chip takes its color from its own name. |
+| The page is one flat fill, edge to edge.                                          | A fixed wash of 3 soft radial gradients behind the whole page.  |
+| The hero is one centered object on black.                                         | An aurora shader backdrop and 250 instanced shapes.             |
 
-What the predecessor did badly, and what this plan fixes:
+Two behavior changes come with it:
 
-| Problem                                                  | Fix                                      |
-| -------------------------------------------------------- | ---------------------------------------- |
-| Content and JSX mixed in `src/constants/*.js`            | Typed data in `src/content/*.ts`, no JSX |
-| Material UI `makeStyles` in every file                   | The token based design system            |
-| 40 third party logo images                               | Text badges. No image assets             |
-| 6 runtime dependencies for typing, scroll, and animation | 2 local hooks                            |
-| No color scheme, no dark mode                            | The semantic tokens, light and dark      |
-| No favicon                                               | An SVG monogram                          |
-| No 3D                                                    | The existing `HeroScene`                 |
-
-## Content decisions
-
-Carry over verbatim: the 4 job entries, the 3 approach cards, the skill groups,
-the 4 spoken languages, the footer tagline, the Mark Twain quote, the 3 contact
-links.
-
-Do not carry over:
-
-- The 2021 status text "an incoming Dell EMC Entry Software Engineer".
-- 4 of the 6 project `longDesc` fields. They hold the same Leap Motion
-  paragraph, which is a copy paste error in the predecessor.
-- 3 project links that point at `hololive.jetri.co`, which does not match the
-  project.
-- The resume PDF. It is 5 years old.
+- A chip carries the same color everywhere, so Python is the same hue in the
+  timeline, in the project cards, and in the skill groups.
+- The timeline and the project cards hold their detail back. A pointer opens a
+  card on hover. A click pins it open. The keyboard opens it with Enter.
 
 ## Changes
 
-### Content
+### The tag palette
 
-- `src/content/profile.ts` name, the 3 typed roles, the quote, the links
-- `src/content/about.ts` about text, status text, the 3 approach cards
-- `src/content/experience.ts` the 4 roles with skills and bullets
-- `src/content/projects.ts` the 6 projects
-- `src/content/skills.ts` JavaScript, Python, Java and their tools
-- `src/content/languages.ts` the 4 spoken languages
-- `src/content/sections.ts` the section id and label list that the nav reads
+- `tokens.ts` gains `tagHues` and a `tag` record with a light value and a dark
+  value for each of the 8 hues.
+- `tokens.css` mirrors them as `--tag-amber` and so on, once for light and
+  once for dark.
+- `src/design/tagHue.ts` maps a tag name to a hue. A language gets an explicit
+  hue. Every other name hashes to one of the 8. The same name always returns
+  the same hue, so the color is stable across sections and across reloads.
+- `src/design/components/Tag.tsx` renders the chip. It reads one hue variable
+  and derives the fill and the border with `color-mix`.
+- `Badge` stays for a chip that carries no technology name.
 
-### Design system
+### The page wash
 
-- `buttonClass.ts` the button styles as a class string, so an anchor can look
-  like a button and stay an anchor
-- `Badge.tsx` a skill or tool tag
-- `Meter.tsx` a proficiency bar with `role="meter"`
-- `ExternalLink.tsx` an anchor with `rel="noreferrer"` set once
-- Export all three from `components/index.ts`
-- Remove `'Inter'` from `--font-sans`. No font file is loaded, so the token
-  lies.
+`global.css` paints 3 radial gradients on a fixed `body::before` layer, at 8
+to 10 percent of the accent, the violet, and the teal. The layer sits behind
+the content and takes no pointer events.
 
-### Hooks
+### The section accent
 
-- `src/hooks/useTypewriter.ts` replaces `react-typing-effect`. Returns the
-  full text at once when the visitor asks for reduced motion.
-- `src/hooks/useActiveSection.ts` replaces `react-scroll`. An
-  IntersectionObserver reports the section in view.
+`Section` gains an `accent` prop. It draws a short colored rule above the
+title. About is violet, Experience is sky, Projects is amber, Skills is
+emerald.
 
-### Sections
+### The hero scene
 
-6 sections, one file each in `src/sections/`. `Nav.tsx` goes in
-`src/components/`.
+`HeroScene.tsx` holds both parts, because they are one scene.
 
-| Section      | Content                                               |
-| ------------ | ----------------------------------------------------- |
-| `Hero`       | the name, the typed roles, 2 links, the quote, the 3D |
-| `About`      | the about text and the 3 approach cards               |
-| `Experience` | the 4 roles on a timeline                             |
-| `Projects`   | the 6 projects                                        |
-| `Skills`     | the 3 skill groups and the 4 spoken languages         |
-| `Contact`    | the tagline and the 3 contact links                   |
+- **Aurora.** One large plane with a fragment shader. 3 blobs move on
+  independent sine paths and mix into the base color. A dither term removes
+  the banding. The colors come from `useSceneColors`.
+- **Swarm.** `<Instances>` with 250 members. Each one takes a position, a
+  scale, and a color from the tag palette, so the hero and the chips share one
+  set of hues. The group rotates and bobs, which is 1 matrix update per frame
+  rather than 250.
+- **Parallax.** The pointer moves the camera. The lerp mutates the camera and
+  allocates nothing inside the frame loop.
+- Reduced motion stops the group, the aurora clock, and the parallax.
 
-`sections.ts` holds these 6 ids, so the nav list and the DOM ids cannot drift.
+Cost: 2 draw calls.
 
-`Hero` keeps the lazy import of `Hero3D`. The Three.js chunk stays out of the
-first load.
+### Reveal on demand
 
-The hero answers the mobile question for this one scene. A wide screen puts the
-scene behind the copy with a scrim. A phone puts the scene in a 280px box under
-the copy. `useMediaQuery` picks one, so only one canvas mounts.
+`src/design/components/Disclosure.tsx`:
 
-### Assets
+- The trigger is a `button` with `aria-expanded` and `aria-controls`.
+- The region animates with `grid-template-rows` from `0fr` to `1fr`.
+- The region takes `inert` when it is closed, so a screen reader and the Tab
+  key skip the hidden text.
+- `open` is true when the card is pinned or when a fine pointer is over it.
+  A coarse pointer, which means a phone, only pins.
 
-- `public/favicon.svg` a monogram that uses the accent token
-- `index.html` links the favicon and sets `theme-color`
+`Experience` and `Projects` both use it. The summary and the chips stay
+visible. The bullet list and the long description hide until the visitor asks.
+
+### Layering
+
+Move `useMediaQuery` from `src/three/hooks/` to `src/hooks/`. The design system
+needs it and must not import from `src/three/`.
 
 ## Tests
 
 ### Unit
 
-- `Meter` reports its value to the accessibility tree
-- `useTypewriter` types forward, and returns the full text under reduced motion
-- `Nav` renders one link per section
-- `Experience` renders every role from the content file
-- `Projects` renders a link only for a project that has one
+- `tagHue` returns the explicit hue for a language, returns the same hue for
+  the same name twice, and returns a hue from the list for an unknown name.
+- `Tag` sets the hue variable for the name that it renders.
+- `Disclosure` reports `aria-expanded` false, then true after a click, and
+  marks the region `inert` only while it is closed.
+- `Experience` renders one trigger per role, and opens one role on a click.
+- `Projects` links only a project that has a link.
 
 ### Manual
 
 Run `npm run dev`, then in the browser:
 
-1. Load `/`. Confirm the hero text paints before the 3D.
-2. Confirm the role text types and cycles.
-3. Click each nav link. Confirm the page scrolls to that section.
-4. Scroll by hand. Confirm the nav marks the section in view.
-5. Switch the OS to dark mode. Confirm every section and the 3D follow.
-6. Set the OS to reduce motion. Reload. Confirm the knot stops and the role
-   text does not type.
-7. Set the window to 375px wide. Confirm no section scrolls sideways.
-8. Confirm the favicon shows in the tab.
+1. Load `/`. Confirm the aurora moves and the shapes drift.
+2. Move the mouse across the hero. Confirm the camera follows and lags.
+3. Read the `r3f-perf` HUD. Confirm 2 calls and 60 fps.
+4. Find Python in the timeline and in Skills. Confirm both chips match.
+5. Hover a timeline role. Confirm the bullets open, and close on exit.
+6. Click a role. Confirm it stays open, and closes on a second click.
+7. Tab to a role. Confirm the outline shows and Enter opens it.
+8. Switch the OS to dark mode. Confirm the wash, the chips, and the scene
+   follow.
+9. Set the OS to reduce motion. Reload. Confirm the scene holds still.
+10. Set the window to 375px. Confirm no sideways scroll, and that a tap opens
+    a card.

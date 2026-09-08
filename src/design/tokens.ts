@@ -8,6 +8,8 @@
  * every light color, and every fog color.
  */
 
+export type ColorMode = 'light' | 'dark';
+
 export const palette = {
   ink: {
     50: '#f6f6f7',
@@ -35,6 +37,61 @@ export const palette = {
     600: '#cc6f14',
   },
 } as const;
+
+/**
+ * The tag hues. A chip takes one of these from its own name, so the same
+ * technology carries the same color in every section.
+ *
+ * Each hue has a light value and a dark value. A light mode chip needs a dark
+ * ink to read on white. A dark mode chip needs the opposite.
+ */
+export const tagHues = [
+  'amber',
+  'orange',
+  'rose',
+  'fuchsia',
+  'violet',
+  'indigo',
+  'blue',
+  'sky',
+  'cyan',
+  'teal',
+  'emerald',
+  'lime',
+] as const;
+
+export type TagHue = (typeof tagHues)[number];
+
+export const tag: Record<ColorMode, Record<TagHue, string>> = {
+  light: {
+    amber: '#b45309',
+    orange: '#c2410c',
+    rose: '#be123c',
+    fuchsia: '#a21caf',
+    violet: '#6d28d9',
+    indigo: '#4338ca',
+    blue: '#1d4ed8',
+    sky: '#0369a1',
+    cyan: '#0e7490',
+    teal: '#0f766e',
+    emerald: '#047857',
+    lime: '#4d7c0f',
+  },
+  dark: {
+    amber: '#fbbf24',
+    orange: '#fb923c',
+    rose: '#fb7185',
+    fuchsia: '#e879f9',
+    violet: '#a78bfa',
+    indigo: '#818cf8',
+    blue: '#60a5fa',
+    sky: '#38bdf8',
+    cyan: '#22d3ee',
+    teal: '#2dd4bf',
+    emerald: '#34d399',
+    lime: '#a3e635',
+  },
+};
 
 export const semantic = {
   light: {
@@ -66,6 +123,11 @@ export const scene = {
     fillLight: palette.accent[300],
     material: palette.accent[600],
     materialAlt: palette.warm[500],
+    /** The aurora backdrop. `base` is the fill that the blobs sit on. */
+    auroraBase: palette.ink[50],
+    auroraBlobs: ['#bcd4ff', '#dccbff', '#bfe9e2'],
+    /** The swarm takes these in order. They are the tag hues. */
+    swarm: ['#0369a1', '#6d28d9', '#b45309', '#0f766e', '#be123c', '#1d4ed8', '#4d7c0f'],
   },
   dark: {
     background: palette.ink[950],
@@ -74,6 +136,9 @@ export const scene = {
     fillLight: palette.accent[500],
     material: palette.accent[400],
     materialAlt: palette.warm[400],
+    auroraBase: palette.ink[950],
+    auroraBlobs: ['#1e5ec0', '#5b2fb5', '#0d7a6b'],
+    swarm: ['#38bdf8', '#a78bfa', '#fbbf24', '#2dd4bf', '#fb7185', '#e879f9', '#a3e635'],
   },
 } as const;
 
@@ -101,5 +166,3 @@ export const motion = {
   base: 220,
   slow: 420,
 } as const;
-
-export type ColorMode = 'light' | 'dark';

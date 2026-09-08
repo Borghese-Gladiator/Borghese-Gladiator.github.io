@@ -27,6 +27,19 @@
   --color-warm-500: #f5912b;
   --color-warm-600: #cc6f14;
 
+  --color-tag-amber: #b45309;
+  --color-tag-orange: #c2410c;
+  --color-tag-rose: #be123c;
+  --color-tag-fuchsia: #a21caf;
+  --color-tag-violet: #6d28d9;
+  --color-tag-indigo: #4338ca;
+  --color-tag-blue: #1d4ed8;
+  --color-tag-sky: #0369a1;
+  --color-tag-cyan: #0e7490;
+  --color-tag-teal: #0f766e;
+  --color-tag-emerald: #047857;
+  --color-tag-lime: #4d7c0f;
+
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
@@ -57,6 +70,20 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* A dark ground needs the light end of each hue. */
+    --color-tag-amber: #fbbf24;
+    --color-tag-orange: #fb923c;
+    --color-tag-rose: #fb7185;
+    --color-tag-fuchsia: #e879f9;
+    --color-tag-violet: #a78bfa;
+    --color-tag-indigo: #818cf8;
+    --color-tag-blue: #60a5fa;
+    --color-tag-sky: #38bdf8;
+    --color-tag-cyan: #22d3ee;
+    --color-tag-teal: #2dd4bf;
+    --color-tag-emerald: #34d399;
+    --color-tag-lime: #a3e635;
+
     --color-background: var(--color-ink-950);
     --color-surface: var(--color-ink-900);
     --color-border: var(--color-ink-700);

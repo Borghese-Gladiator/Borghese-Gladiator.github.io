@@ -1,5 +1,5 @@
 import { scene, type ColorMode } from '../../design/tokens';
-import { useMediaQuery } from './useMediaQuery';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export function useColorMode(): ColorMode {
   return useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light';

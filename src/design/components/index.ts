@@ -1,14 +1,17 @@
-export { Badge } from './Badge';
 export { Button } from './Button';
 export type { ButtonProps } from './Button';
 export { buttonClass } from './buttonClass';
 export type { ButtonStyleProps } from './buttonClass';
 export { Card } from './Card';
 export { Container } from './Container';
+export { Disclosure } from './Disclosure';
+export type { DisclosureProps } from './Disclosure';
 export { ExternalLink } from './ExternalLink';
 export { Meter } from './Meter';
 export type { MeterProps } from './Meter';
 export { Section } from './Section';
 export type { SectionProps } from './Section';
+export { Tag } from './Tag';
+export type { TagProps } from './Tag';
 export { Text } from './Text';
 export type { TextProps } from './Text';

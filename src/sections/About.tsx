@@ -1,9 +1,9 @@
-import { Badge, Card, Section, Text } from '../design/components';
+import { Card, Section, Tag, Text } from '../design/components';
 import { aboutText, approachData } from '../content/about';
 
 export function About() {
   return (
-    <Section id="about" title="About">
+    <Section id="about" title="About" accent="violet">
       <div className="max-w-2xl space-y-4">
         {aboutText.map((paragraph) => (
           <Text key={paragraph} muted>
@@ -24,7 +24,7 @@ export function About() {
             <ul className="mt-3 flex flex-wrap gap-2">
               {approach.tools.map((tool) => (
                 <li key={tool}>
-                  <Badge>{tool}</Badge>
+                  <Tag name={tool} />
                 </li>
               ))}
             </ul>

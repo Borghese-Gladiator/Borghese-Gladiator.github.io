@@ -1,0 +1,88 @@
+import { useId, useState, type ReactNode } from 'react';
+import { cn } from '../cn';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
+
+export interface DisclosureProps {
+  /** The card title. It becomes the control that opens the card. */
+  heading: ReactNode;
+  /** Stays visible next to the heading. Put a link here, not in the heading. */
+  meta?: ReactNode;
+  /** Hidden until the visitor opens the card. */
+  children: ReactNode;
+  /** Names the control when the heading text repeats across cards. */
+  label?: string;
+  className?: string;
+}
+
+/**
+ * A card that holds its detail back.
+ *
+ * A fine pointer opens it on hover. A click pins it, so it stays open when the
+ * pointer leaves. A coarse pointer, which means a phone, only pins.
+ *
+ * The region takes `inert` while it is closed, so the Tab key and a screen
+ * reader skip text that the visitor cannot see.
+ */
+export function Disclosure({
+  heading,
+  meta,
+  children,
+  label,
+  className,
+}: DisclosureProps) {
+  const regionId = useId();
+  const canHover = useMediaQuery('(hover: hover) and (pointer: fine)');
+  const [pinned, setPinned] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const open = pinned || (canHover && hovered);
+
+  return (
+    <div
+      className={cn(
+        'rounded-lg border bg-[var(--color-surface)]',
+        'transition-colors duration-[var(--duration-base)]',
+        open ? 'border-[var(--color-accent)]' : 'border-[var(--color-border)]',
+        className,
+      )}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+    >
+      <div className="p-6">
+        <h3 className="text-lg font-medium tracking-tight">
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls={regionId}
+            aria-label={label}
+            onClick={() => setPinned((was) => !was)}
+            className="flex w-full cursor-pointer items-baseline justify-between gap-3 text-left"
+          >
+            <span>{heading}</span>
+            <span
+              aria-hidden="true"
+              className={cn(
+                'shrink-0 text-sm text-[var(--color-text-muted)]',
+                'transition-transform duration-[var(--duration-base)]',
+                open && 'rotate-180',
+              )}
+            >
+              ▾
+            </span>
+          </button>
+        </h3>
+        {meta}
+      </div>
+
+      <div
+        id={regionId}
+        inert={!open}
+        className="grid transition-[grid-template-rows] duration-[var(--duration-slow)] ease-(--ease-out-soft)"
+        style={{ gridTemplateRows: open ? '1fr' : '0fr' }}
+      >
+        <div className="overflow-hidden">
+          <div className="px-6 pb-6">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
