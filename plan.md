@@ -1,59 +1,45 @@
-# Plan: 3 changes, 3 commits
+# Plan: publish the site on GitHub Pages
 
-## 1. The theme control holds 2 states, not 3
+## Brief
 
-The control carried a System position. That was wrong. There are 2 modes,
-light and dark. The system does not add a third one. It decides which mode the
-visitor starts on, and it keeps deciding until the visitor picks.
+The remote repo exists and is public, but it holds 0 commits. The local repo
+holds 9 commits. Git pruned `origin/main`, so the local branch reports
+"upstream is gone". The fix is a first push, not a repair.
 
-- `theme.ts` keeps `picked`, which is a mode or null. Null means no pick, so
-  `resolveMode` reads the system. A pick overrides it and persists.
-- `setMode` and `toggleMode` replace `setChoice` and `NEXT_CHOICE`.
-- `useThemeChoice` goes. The control reads `useColorMode`, the same hook that
-  the scene reads.
-- The icon shows the mode that a click gives, which is the common pattern for
-  a 2 state control. The label says "Switch to dark mode".
+The repo also has no deploy workflow. GitHub Pages cannot build a Vite app on
+its own, so a workflow must run `npm run build` and upload `dist/`.
 
-Nothing changes in the CSS or in the inline script. Both already key off the
-resolved mode and never saw the third state.
+## Changes
 
-## 2. The reveal control answers a click
+- Add `.github/workflows/deploy.yml`.
+  - It runs on a push to `main` and on a manual trigger.
+  - The build job runs `npm ci` and `npm run build`, then uploads `dist/`
+    with `actions/upload-pages-artifact`.
+  - The deploy job calls `actions/deploy-pages`.
+  - Node 24 matches the local version.
+- Push `main` to `origin` with `-u` to set the upstream again.
 
-A click pins a card open, but the control looks the same as it does on hover,
-so the click has no feedback.
+Nothing in the app changes. `base` stays `/`, which is correct for a
+`<user>.github.io` repo.
 
-- The circle presses in on `:active`.
-- A ring grows out of the circle and fades once, on the click that pins.
-  A counter keys the ring, so React remounts it and the animation replays on
-  every pin.
-- A pinned circle takes a solid accent fill. A hover keeps the 15 percent
-  tint. The 2 states now read differently, which is the point of the click.
-- The keyframes live in `global.css`. Reduced motion already cuts every
-  animation to 0.01ms there, so the ring does not run.
+## Manual step for the owner
 
-## 3. The quote
-
-"The secret to getting ahead is getting started." becomes "The secret of
-getting ahead is getting started." One line in `content/profile.ts`. That is
-also the wording that Mark Twain is quoted with.
+The token in this session has push rights but not admin rights, so it cannot
+turn Pages on. The owner must open
+Settings > Pages and set Source to **GitHub Actions**.
 
 ## Tests
 
 ### Unit
 
-- The store takes its default from the system while nothing is stored.
-- A pick holds against the system and persists.
-- `toggleMode` turns dark into light and back.
-- The control offers 2 names only, and 2 clicks return to the start.
+`npm run test` is unchanged. No source file changes.
 
 ### Manual
 
-Run `npm run dev`, then in the browser:
-
-1. Clear the storage, set the OS to dark, reload. Confirm the page is dark.
-2. Set the OS to light, clear the storage, reload. Confirm the page is light.
-3. Click the control twice. Confirm it returns to the mode it started in.
-4. Click the caret on a card. Confirm the circle presses, a ring grows out,
-   and the circle stays filled while the card is pinned.
-5. Hover a different card. Confirm the circle tints but does not fill.
-6. Read the quote in the hero.
+1. Run `npm run build`. The build must pass.
+2. Push `main`. Confirm that the 9 commits appear on GitHub.
+3. Set the Pages source to GitHub Actions.
+4. Open the Actions tab. Confirm that both jobs pass.
+5. Open `https://borghese-gladiator.github.io/`. Confirm that the hero
+   renders, that the 3D scene loads, and that the theme control works.
+6. Open the browser console. Confirm that no asset returns a 404.
