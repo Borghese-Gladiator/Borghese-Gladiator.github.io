@@ -34,7 +34,14 @@ export function Disclosure({
   const canHover = useMediaQuery('(hover: hover) and (pointer: fine)');
   const [pinned, setPinned] = useState(false);
   const [hovered, setHovered] = useState(false);
+  // The count keys the ring, so React remounts it and the animation replays.
+  const [pressCount, setPressCount] = useState(0);
   const open = pinned || (canHover && hovered);
+
+  const onPress = () => {
+    setPinned((was) => !was);
+    setPressCount((count) => count + 1);
+  };
 
   return (
     <div
@@ -54,7 +61,7 @@ export function Disclosure({
             aria-expanded={open}
             aria-controls={regionId}
             aria-label={label}
-            onClick={() => setPinned((was) => !was)}
+            onClick={onPress}
             className={cn(
               'group flex w-full cursor-pointer items-center justify-between gap-4 rounded-md text-left',
               'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)]',
@@ -64,14 +71,23 @@ export function Disclosure({
             <span
               aria-hidden="true"
               className={cn(
-                'flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2',
-                'transition-[color,border-color,background-color] duration-[var(--duration-base)]',
+                'relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2',
+                'transition-[color,border-color,background-color,transform] duration-[var(--duration-base)]',
+                'group-active:scale-90',
                 'group-focus-visible:border-[var(--color-accent)]',
-                open
-                  ? 'border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-accent)_15%,transparent)] text-[var(--color-accent)]'
-                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]',
+                pinned
+                  ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-accent-contrast)]'
+                  : open
+                    ? 'border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-accent)_15%,transparent)] text-[var(--color-accent)]'
+                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]',
               )}
             >
+              {pressCount > 0 ? (
+                <span
+                  key={pressCount}
+                  className="press-ring absolute inset-0 rounded-full border-2 border-[var(--color-accent)]"
+                />
+              ) : null}
               <svg
                 viewBox="0 0 24 24"
                 fill="none"

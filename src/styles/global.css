@@ -61,6 +61,26 @@ canvas {
   touch-action: none;
 }
 
+/*
+  The ring that grows out of a control when a click pins it. The reduced
+  motion block below cuts it to nothing, so it does not run for a visitor who
+  asks for less movement.
+*/
+@keyframes press-ring {
+  from {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+.press-ring {
+  animation: press-ring var(--duration-slow) var(--ease-out-soft) forwards;
+}
+
 /* The nav is sticky. Keep an anchor target clear of it. */
 section[id],
 footer[id] {
