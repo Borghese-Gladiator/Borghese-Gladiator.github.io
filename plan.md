@@ -1,92 +1,59 @@
-# Plan: a theme control in the nav
+# Plan: 3 changes, 3 commits
 
-## Brief
+## 1. The theme control holds 2 states, not 3
 
-The site reads `prefers-color-scheme` and offers no choice. A visitor who
-wants the other mode has to change the setting of the operating system.
+The control carried a System position. That was wrong. There are 2 modes,
+light and dark. The system does not add a third one. It decides which mode the
+visitor starts on, and it keeps deciding until the visitor picks.
 
-Add a control at the top right of the nav. It holds 3 states, not 2, because
-"follow the system" is the current behavior and must survive.
+- `theme.ts` keeps `picked`, which is a mode or null. Null means no pick, so
+  `resolveMode` reads the system. A pick overrides it and persists.
+- `setMode` and `toggleMode` replace `setChoice` and `NEXT_CHOICE`.
+- `useThemeChoice` goes. The control reads `useColorMode`, the same hook that
+  the scene reads.
+- The icon shows the mode that a click gives, which is the common pattern for
+  a 2 state control. The label says "Switch to dark mode".
 
-| State  | Result                                                         |
-| ------ | -------------------------------------------------------------- |
-| System | Follow `prefers-color-scheme`, and follow a later change to it |
-| Light  | Light, whatever the system says                                |
-| Dark   | Dark, whatever the system says                                 |
+Nothing changes in the CSS or in the inline script. Both already key off the
+resolved mode and never saw the third state.
 
-One button cycles System, Light, Dark. The choice persists in
-`localStorage`.
+## 2. The reveal control answers a click
 
-## The problem to solve first
+A click pins a card open, but the control looks the same as it does on hover,
+so the click has no feedback.
 
-3 things read the color mode and they must agree:
+- The circle presses in on `:active`.
+- A ring grows out of the circle and fades once, on the click that pins.
+  A counter keys the ring, so React remounts it and the animation replays on
+  every pin.
+- A pinned circle takes a solid accent fill. A hover keeps the 15 percent
+  tint. The 2 states now read differently, which is the point of the click.
+- The keyframes live in `global.css`. Reduced motion already cuts every
+  animation to 0.01ms there, so the ring does not run.
 
-1. The CSS tokens, through a media query.
-2. `useSceneColors`, through `matchMedia` in React.
-3. The new control.
+## 3. The quote
 
-A media query cannot read a stored choice, so the CSS has to key off an
-attribute instead.
-
-## Changes
-
-### The attribute, not the media query
-
-- `tokens.css` moves the dark values from
-  `@media (prefers-color-scheme: dark)` to `:root[data-theme='dark']`.
-- `index.html` gains a small inline script that sets `data-theme` before the
-  first paint. Without it the page paints light and then flips.
-- The script is the only reason the media query can go. The site is a React
-  page, so a visitor with no JavaScript sees nothing at all. A dark fallback
-  for that case would protect nobody, and keeping the media query would mean 3
-  copies of the same token block.
-- `global.css` sets `color-scheme` from the attribute, so the scrollbar and
-  the form controls follow the choice.
-
-### One source of truth
-
-`src/theme/theme.ts` holds a small store:
-
-- `getChoice`, `setChoice`, `subscribe`, `resolve`.
-- `resolve` returns light or dark. It reads `matchMedia` only while the choice
-  is System.
-- `useThemeChoice` and `useColorMode` read it with `useSyncExternalStore`.
-
-The store sits outside React, not in a context, because `useSceneColors` runs
-inside the `<Canvas>` tree. That tree is a separate reconciler, so a context
-above it is not reliable. A module store is the same value for every tree.
-
-`useSceneColors` reads `useColorMode` from the store rather than calling
-`matchMedia` itself. The scene then follows an explicit choice.
-
-### The control
-
-`src/components/ThemeToggle.tsx`. A circled icon button that matches the
-reveal control: a sun, a moon, or a monitor. The label names the state and the
-next state, so a screen reader announces both.
-
-`Nav` puts it at the right end, after the section list. The section list
-already shrinks and scrolls on a phone, so the button keeps its size.
+"The secret to getting ahead is getting started." becomes "The secret of
+getting ahead is getting started." One line in `content/profile.ts`. That is
+also the wording that Mark Twain is quoted with.
 
 ## Tests
 
 ### Unit
 
-- `resolve` returns the stored choice, and reads the system only for System.
-- `setChoice` writes `data-theme` on the root element.
-- `setChoice` survives a `localStorage` that throws, which is a private
-  window.
-- `ThemeToggle` cycles System, Light, Dark, System on 3 clicks.
+- The store takes its default from the system while nothing is stored.
+- A pick holds against the system and persists.
+- `toggleMode` turns dark into light and back.
+- The control offers 2 names only, and 2 clicks return to the start.
 
 ### Manual
 
 Run `npm run dev`, then in the browser:
 
-1. Click the control 3 times. Confirm the page turns light, dark, then back
-   to the system mode.
-2. Confirm the hero scene changes with the page, not only the DOM.
-3. Reload after a choice. Confirm the choice holds and the page does not
-   flash the other mode first.
-4. Set the choice to System, then change the OS mode. Confirm the page
-   follows without a reload.
-5. Confirm the control is at 375px wide and does not push the nav.
+1. Clear the storage, set the OS to dark, reload. Confirm the page is dark.
+2. Set the OS to light, clear the storage, reload. Confirm the page is light.
+3. Click the control twice. Confirm it returns to the mode it started in.
+4. Click the caret on a card. Confirm the circle presses, a ring grows out,
+   and the circle stays filled while the card is pinned.
+5. Hover a different card. Confirm the circle tints but does not fill.
+6. Read the quote in the hero.

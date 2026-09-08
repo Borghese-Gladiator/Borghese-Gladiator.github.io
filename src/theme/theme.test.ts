@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { getChoice, resolveMode, setChoice } from './theme';
+import { resolveMode, setMode, toggleMode } from './theme';
 
 function systemPrefersDark(dark: boolean) {
   vi.spyOn(window, 'matchMedia').mockImplementation(
@@ -20,7 +20,7 @@ function systemPrefersDark(dark: boolean) {
 describe('the theme store', () => {
   beforeEach(() => {
     localStorage.clear();
-    setChoice('system');
+    setMode('light');
   });
 
   afterEach(() => vi.restoreAllMocks());
@@ -28,44 +28,47 @@ describe('the theme store', () => {
   it.each([
     { system: true, mode: 'dark' },
     { system: false, mode: 'light' },
-  ])('follows the system while the choice is System', ({ system, mode }) => {
+  ])('takes the default from the system before a pick', async ({ system, mode }) => {
+    localStorage.clear();
     systemPrefersDark(system);
-    setChoice('system');
+
+    // The module reads the storage once, at import. Load it again.
+    vi.resetModules();
+    const fresh = await import('./theme');
+
+    expect(fresh.resolveMode()).toBe(mode);
+  });
+
+  it.each(['light', 'dark'] as const)('holds the %s pick against the system', (mode) => {
+    systemPrefersDark(mode === 'light');
+    setMode(mode);
+
     expect(resolveMode()).toBe(mode);
+    expect(localStorage.getItem('theme')).toBe(mode);
   });
 
-  it.each(['light', 'dark'] as const)(
-    'ignores the system for the %s choice',
-    (choice) => {
-      systemPrefersDark(choice === 'light');
-      setChoice(choice);
-
-      expect(getChoice()).toBe(choice);
-      expect(resolveMode()).toBe(choice);
-    },
-  );
-
-  it('writes the mode to the root element and stores the choice', () => {
-    setChoice('dark');
-
+  it('writes the mode to the root element', () => {
+    setMode('dark');
     expect(document.documentElement.dataset.theme).toBe('dark');
-    expect(localStorage.getItem('theme')).toBe('dark');
   });
 
-  it('drops the stored value for the System choice', () => {
-    setChoice('dark');
-    setChoice('system');
+  it('turns dark into light and back', () => {
+    setMode('dark');
 
-    expect(localStorage.getItem('theme')).toBeNull();
+    toggleMode();
+    expect(resolveMode()).toBe('light');
+
+    toggleMode();
+    expect(resolveMode()).toBe('dark');
   });
 
-  it('keeps the choice when storage throws, which is a private window', () => {
+  it('keeps the mode when storage throws, which is a private window', () => {
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('denied');
     });
 
-    expect(() => setChoice('dark')).not.toThrow();
-    expect(getChoice()).toBe('dark');
+    expect(() => setMode('dark')).not.toThrow();
+    expect(resolveMode()).toBe('dark');
     expect(document.documentElement.dataset.theme).toBe('dark');
   });
 });
