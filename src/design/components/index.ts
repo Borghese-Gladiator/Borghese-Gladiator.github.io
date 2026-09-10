@@ -7,6 +7,8 @@ export { Container } from './Container';
 export { Disclosure } from './Disclosure';
 export type { DisclosureProps } from './Disclosure';
 export { ExternalLink } from './ExternalLink';
+export { Icon } from './Icon';
+export type { IconName, IconProps } from './Icon';
 export { Meter } from './Meter';
 export type { MeterProps } from './Meter';
 export { Section } from './Section';
