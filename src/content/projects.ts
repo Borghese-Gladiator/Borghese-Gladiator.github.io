@@ -9,6 +9,20 @@ export interface Project {
 
 export const projectData: Project[] = [
   {
+    name: 'Financial Report RAG',
+    summary: 'An AI chatbot that answers a question about my own transactions.',
+    detail:
+      'The chatbot generates a table, a graph, and an insight about my transactions, which means the category, the merchant, and the card use. It reads Plaid data from Lunch Money and answers with RAG over a FAISS index and WordLlama embeddings. Llama 3 writes the answer, so the transaction data never leaves the machine.',
+    stack: ['Python', 'Llama 3', 'RAG', 'FAISS', 'Plaid'],
+  },
+  {
+    name: 'Creaticles DApp',
+    summary: 'Contract work on a Web3 voting platform.',
+    detail:
+      'A creator posts a contest and the holders vote on the entries. The front end is Next.js with MongoDB. The smart contracts are Solidity, built and tested with Hardhat and called with Ethers. The DApp runs on Vercel and the contract runs on the Ropsten Ethereum test network.',
+    stack: ['Next.js', 'Solidity', 'Hardhat', 'Ethers', 'MongoDB'],
+  },
+  {
     name: 'Website IT Chatbot',
     summary: 'An IT support chatbot that embeds in a web page.',
     detail:
