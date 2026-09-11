@@ -81,7 +81,7 @@ canvas {
   animation: press-ring var(--duration-slow) var(--ease-out-soft) forwards;
 }
 
-/* The nav is sticky. Keep an anchor target clear of it. */
+/* The nav is fixed over the page. Keep an anchor target clear of it. */
 section[id],
 footer[id] {
   scroll-margin-top: 4rem;

@@ -3,15 +3,29 @@ import { cn } from '../design/cn';
 import { sections } from '../content/sections';
 import { profile } from '../content/profile';
 import { useActiveSection } from '../hooks/useActiveSection';
+import { useScrolledPast } from '../hooks/useScrolledPast';
 import { ThemeToggle } from './ThemeToggle';
 
 const IDS = sections.map((section) => section.id);
 
+/**
+ * The nav stays out of the way over the hero, then slides in once the hero
+ * leaves the viewport. `inert` keeps the hidden links off the Tab order.
+ */
 export function Nav() {
   const active = useActiveSection(IDS);
+  const shown = useScrolledPast('home');
 
   return (
-    <header className="sticky top-0 z-10 border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-background)_85%,transparent)] backdrop-blur">
+    <header
+      inert={!shown}
+      className={cn(
+        'fixed top-0 right-0 left-0 z-10 border-b border-[var(--color-border)]',
+        'bg-[color-mix(in_srgb,var(--color-background)_85%,transparent)] backdrop-blur',
+        'transition-[opacity,transform] duration-[var(--duration-base)] ease-(--ease-out-soft)',
+        shown ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0',
+      )}
+    >
       <Container className="flex h-14 items-center justify-between gap-4">
         <a
           href="#home"
