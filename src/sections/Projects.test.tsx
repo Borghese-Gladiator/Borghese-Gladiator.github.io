@@ -16,6 +16,16 @@ describe('Projects', () => {
     });
   });
 
+  it('keeps a source link on every closed card', () => {
+    render(<Projects />);
+
+    projectData.forEach((project) => {
+      expect(
+        screen.getByRole('link', { name: `${project.name} on GitHub` }),
+      ).toHaveAttribute('href', project.repo);
+    });
+  });
+
   it('reveals the detail and the link of a project on a click', async () => {
     const project = projectData.find((entry) => entry.href)!;
     render(<Projects />);
