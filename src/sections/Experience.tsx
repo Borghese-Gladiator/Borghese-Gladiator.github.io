@@ -93,7 +93,7 @@ export function Experience() {
                     </span>
                   </h4>
                   <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                    {internship.dateText}
+                    {internship.dateText} · {internship.location} · {internship.team}
                   </p>
                   <Text muted className="mt-2">
                     {internship.summary}
