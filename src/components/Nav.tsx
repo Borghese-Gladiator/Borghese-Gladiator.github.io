@@ -10,23 +10,26 @@ const IDS = sections.map((section) => section.id);
  * The nav sits at the top of the page and scrolls away with it.
  *
  * Nothing scrolls under it, so it needs no scrim and no bottom edge. The
- * controls that must stay reachable live in `ContactRail` and in
- * `MobileMenu`, which are both fixed.
+ * section links stay at every width. A phone puts them on a second row,
+ * under the name.
+ *
+ * The nav leaves the screen after a scroll, so the controls that must stay
+ * reachable live in `ContactRail` and in `MobileMenu`, which are both fixed.
  */
 export function Nav() {
   const active = useActiveSection(IDS);
 
   return (
     <header className="relative z-10">
-      <Container className="flex h-16 items-center justify-between gap-4">
+      <Container className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 py-4 sm:h-16 sm:flex-nowrap sm:py-0">
         <a
           href="#home"
           className="text-sm font-semibold tracking-tight whitespace-nowrap"
         >
           {profile.name}
         </a>
-        <nav aria-label="Sections" className="hidden lg:block">
-          <ul className="flex items-center gap-2">
+        <nav aria-label="Sections">
+          <ul className="-ml-2 flex flex-wrap items-center gap-x-1 gap-y-1 sm:ml-0 sm:gap-x-2">
             {sections.map((section) => (
               <li key={section.id}>
                 <a
