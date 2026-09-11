@@ -1,37 +1,6 @@
-export interface Approach {
-  title: string;
-  summary: string;
-  practice: string;
-  tools: string[];
-}
-
 export const aboutText = [
-  'I studied computer science at UMass Amherst and graduated in May 2021.',
-  'I work on linguistics, deep learning, and NLP. My greatest passion is building web utilities that make life more fun.',
-];
-
-export const statusText = 'Software engineer at Klaviyo.';
-
-export const approachData: Approach[] = [
-  {
-    title: 'DevOps',
-    summary:
-      'DevOps automates QA and release engineering, and it still ships quality code.',
-    practice: 'CI/CD infrastructure',
-    tools: ['Jenkins', 'GitLab', 'Docker'],
-  },
-  {
-    title: 'Front end',
-    summary:
-      'The front end shows my work. Clean state management and fast load times make it convincing.',
-    practice: 'Web and mobile apps',
-    tools: ['React', 'TypeScript', 'CSS and flexbox'],
-  },
-  {
-    title: 'Agile',
-    summary:
-      'Agile gives a project efficiency and accountability. It moves a group toward one goal.',
-    practice: 'Agile in practice',
-    tools: ['Jira', 'Scrum', 'Kanban'],
-  },
+  'Hi, I am Tim. I build the systems that turn raw event data into a number somebody can act on, and I like the part where a slow manual step disappears.',
+  'Right now I am a Software Engineer III at Klaviyo, where I work on the Reporting Query Platform. It joins raw event data with user-defined queries to calculate marketing performance, and it backs both the external reporting API and public work like the 2024 Consumer Spending Report. I built the asynchronous export service behind the Report Builder, and every Black Friday I keep the platform standing with load tests, autoscaling, and a dashboard that pages me before a customer notices.',
+  'Before that I built features across a Next.js and GraphQL monorepo at Rewst, and I worked on the CloudIQ analytics platform at Dell EMC. Earlier still I spent three summers on CI/CD and test automation at RSA Security and Avid Technology, which is where I learned that the build pipeline is a product too.',
+  'Language came before code for me. I speak English, Chinese, and Japanese, plus enough Spanish to be dangerous, and that interest turned into NLP work: a chatbot that reads my own transaction history, a prototype that answers questions about a dashboard. Outside work I build small web utilities that make life more fun, which is the most honest description of the hobby I have.',
 ];
