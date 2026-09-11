@@ -6,6 +6,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* A phone must never scroll sideways. Nothing on the page is wider than it. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* The scrollbar and the form controls follow the choice, not the system. */
 :root[data-theme='light'] {
   color-scheme: light;
@@ -81,10 +88,10 @@ canvas {
   animation: press-ring var(--duration-slow) var(--ease-out-soft) forwards;
 }
 
-/* The nav is fixed over the page. Keep an anchor target clear of it. */
+/* Nothing is fixed at the top. An anchor target needs breathing room only. */
 section[id],
 footer[id] {
-  scroll-margin-top: 4rem;
+  scroll-margin-top: 1.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

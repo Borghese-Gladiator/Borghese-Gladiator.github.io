@@ -4,7 +4,7 @@ import { Icon } from './Icon';
 import type { IconName } from './Icon';
 
 describe('Icon', () => {
-  it.each<IconName>(['mail', 'github', 'linkedin', 'arrowUpRight'])(
+  it.each<IconName>(['mail', 'github', 'linkedin', 'arrowUpRight', 'menu', 'close'])(
     'draws the %s shape',
     (name) => {
       const { container } = render(<Icon name={name} />);

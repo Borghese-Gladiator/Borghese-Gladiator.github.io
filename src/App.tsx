@@ -1,3 +1,5 @@
+import { ContactRail } from './components/ContactRail';
+import { MobileMenu } from './components/MobileMenu';
 import { Nav } from './components/Nav';
 import { About } from './sections/About';
 import { Contact } from './sections/Contact';
@@ -24,6 +26,8 @@ export default function App() {
         <Skills />
       </main>
       <Contact />
+      <ContactRail />
+      <MobileMenu />
     </>
   );
 }

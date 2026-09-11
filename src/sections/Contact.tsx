@@ -1,13 +1,9 @@
 import type { CSSProperties } from 'react';
 import { cn } from '../design/cn';
 import { Container, Icon } from '../design/components';
+import { isWebLink } from '../design/isWebLink';
 import { links, profile } from '../content/profile';
 import type { ProfileLink } from '../content/profile';
-
-/** A `mailto:` stays in the tab. Only a web link opens a new one. */
-function isWebLink(href: string): boolean {
-  return href.startsWith('http');
-}
 
 function ContactCard({ link }: { link: ProfileLink }) {
   const hue = `var(--color-tag-${link.hue})`;

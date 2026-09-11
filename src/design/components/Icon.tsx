@@ -1,7 +1,7 @@
 import type { ReactNode, SVGProps } from 'react';
 import { cn } from '../cn';
 
-export type IconName = 'mail' | 'github' | 'linkedin' | 'arrowUpRight';
+export type IconName = 'mail' | 'github' | 'linkedin' | 'arrowUpRight' | 'menu' | 'close';
 
 /**
  * The shapes sit at module scope, so a render never rebuilds them.
@@ -30,6 +30,19 @@ const SHAPES: Record<IconName, ReactNode> = {
     <>
       <path d="M7 17 17 7" />
       <path d="M8 7h9v9" />
+    </>
+  ),
+  menu: (
+    <>
+      <path d="M4 7h16" />
+      <path d="M4 12h16" />
+      <path d="M4 17h16" />
+    </>
+  ),
+  close: (
+    <>
+      <path d="M6 6l12 12" />
+      <path d="M18 6 6 18" />
     </>
   ),
 };

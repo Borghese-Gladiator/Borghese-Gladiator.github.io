@@ -6,7 +6,9 @@ import { cn } from '../design/cn';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useSceneColors } from './hooks/useSceneColors';
 
-const SHOW_PERF = import.meta.env.DEV;
+/** The HUD stays off. Add `?perf` to the URL in dev to turn it on. */
+const SHOW_PERF =
+  import.meta.env.DEV && new URLSearchParams(window.location.search).has('perf');
 
 export interface SceneCanvasProps {
   children: ReactNode;
