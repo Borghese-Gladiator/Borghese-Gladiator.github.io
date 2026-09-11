@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { buttonClass, Container, Text } from '../design/components';
 import { profile } from '../content/profile';
-import { statusText } from '../content/about';
 import { useTypewriter } from '../hooks/useTypewriter';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 
@@ -51,10 +50,7 @@ export function Hero() {
       ) : null}
 
       <Container className="relative flex flex-col py-16 sm:min-h-[560px] sm:justify-center sm:py-24">
-        <p className="text-sm tracking-widest text-[var(--color-text-muted)] uppercase">
-          {statusText}
-        </p>
-        <h1 className="mt-4 text-5xl font-semibold tracking-tight sm:text-6xl">
+        <h1 className="text-5xl font-semibold tracking-tight sm:text-6xl">
           {profile.name}
         </h1>
         <p className="mt-4 h-9 text-2xl font-medium text-[var(--color-accent)]">
@@ -65,8 +61,13 @@ export function Hero() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <a href="#projects" className={buttonClass()}>
-            View work
+          <a
+            href={profile.resumeHref}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={buttonClass()}
+          >
+            View resume
           </a>
           <a href="#contact" className={buttonClass({ variant: 'secondary' })}>
             Get in touch

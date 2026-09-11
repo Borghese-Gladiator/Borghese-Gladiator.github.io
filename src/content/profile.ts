@@ -13,6 +13,8 @@ export interface ProfileLink {
 export const profile = {
   name: 'Timothy Shee',
   roles: ['Full stack developer.', 'DevOps engineer.', 'NLP enthusiast.'],
+  /** Vite copies `public/` to the site root, so this file lives at `public/resume.pdf`. */
+  resumeHref: '/resume.pdf',
   quote: {
     text: 'The secret of getting ahead is getting started.',
     author: 'Mark Twain',
