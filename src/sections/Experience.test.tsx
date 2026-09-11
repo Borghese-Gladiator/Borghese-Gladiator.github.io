@@ -3,16 +3,32 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Experience } from './Experience';
 import { experienceData } from '../content/experience';
+import { education } from '../content/education';
+
+const educationLabel = `Internships during the ${education.degree}`;
 
 describe('Experience', () => {
-  it('renders one closed card per role', () => {
+  it('renders one closed card per role, then the education card', () => {
     render(<Experience />);
 
     const triggers = screen.getAllByRole('button', { expanded: false });
-    expect(triggers).toHaveLength(experienceData.length);
-    expect(triggers.map((trigger) => trigger.getAttribute('aria-label'))).toEqual(
-      experienceData.map((role) => `${role.title} at ${role.company}`),
-    );
+    expect(triggers).toHaveLength(experienceData.length + 1);
+    expect(triggers.map((trigger) => trigger.getAttribute('aria-label'))).toEqual([
+      ...experienceData.map((role) => `${role.title} at ${role.company}`),
+      educationLabel,
+    ]);
+  });
+
+  it('reveals every internship when the education card opens', async () => {
+    render(<Experience />);
+
+    const trigger = screen.getByRole('button', { name: educationLabel });
+    await userEvent.click(trigger);
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    education.internships.forEach((internship) => {
+      expect(screen.getByText(internship.summary)).toBeVisible();
+    });
   });
 
   it('reveals the highlights of one role on a click', async () => {
