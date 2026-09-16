@@ -23,6 +23,16 @@ describe('Disclosure', () => {
     ).toHaveAttribute('inert');
   });
 
+  it('renders the banner above the heading while the card is closed', () => {
+    render(
+      <Disclosure heading="Scrape as a Service" banner={<img alt="The web UI." />}>
+        <p>The detail.</p>
+      </Disclosure>,
+    );
+
+    expect(screen.getByRole('img', { name: 'The web UI.' })).toBeVisible();
+  });
+
   it('opens on a click and closes on a second click', async () => {
     const trigger = setup();
     const region = document.getElementById(trigger.getAttribute('aria-controls')!);

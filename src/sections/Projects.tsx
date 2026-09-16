@@ -1,5 +1,6 @@
 import { Disclosure, ExternalLink, Icon, Section, Tag, Text } from '../design/components';
-import { projectData } from '../content/projects';
+import { githubProfile, visibleProjects } from '../content/projects';
+import { ProjectBanner } from './ProjectBanner';
 
 /**
  * The source link for one card.
@@ -25,10 +26,11 @@ export function Projects() {
   return (
     <Section id="projects" title="Projects" accent="amber">
       <div className="grid items-start gap-6 md:grid-cols-2">
-        {projectData.map((project) => (
+        {visibleProjects.map((project) => (
           <Disclosure
             key={project.name}
             heading={project.name}
+            banner={<ProjectBanner image={project.image} />}
             meta={
               <>
                 <Text className="mt-2">{project.summary}</Text>
@@ -40,7 +42,9 @@ export function Projects() {
                       </li>
                     ))}
                   </ul>
-                  <RepoLink href={project.repo} name={project.name} />
+                  {project.repo ? (
+                    <RepoLink href={project.repo} name={project.name} />
+                  ) : null}
                 </div>
               </>
             }
@@ -61,6 +65,10 @@ export function Projects() {
           </Disclosure>
         ))}
       </div>
+
+      <p className="mt-10 text-sm">
+        <ExternalLink href={githubProfile}>See every repository on GitHub</ExternalLink>
+      </p>
     </Section>
   );
 }

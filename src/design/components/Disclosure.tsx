@@ -7,6 +7,8 @@ export interface DisclosureProps {
   heading: ReactNode;
   /** Stays visible next to the heading. Put a link here, not in the heading. */
   meta?: ReactNode;
+  /** Sits above the heading and reaches the card edge. */
+  banner?: ReactNode;
   /** Hidden until the visitor opens the card. */
   children: ReactNode;
   /** Names the control when the heading text repeats across cards. */
@@ -26,6 +28,7 @@ export interface DisclosureProps {
 export function Disclosure({
   heading,
   meta,
+  banner,
   children,
   label,
   className,
@@ -46,7 +49,7 @@ export function Disclosure({
   return (
     <div
       className={cn(
-        'rounded-lg border bg-[var(--color-surface)]',
+        'overflow-hidden rounded-lg border bg-[var(--color-surface)]',
         'transition-colors duration-[var(--duration-base)]',
         open ? 'border-[var(--color-accent)]' : 'border-[var(--color-border)]',
         className,
@@ -54,6 +57,7 @@ export function Disclosure({
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
     >
+      {banner}
       <div className="p-6">
         <h3 className="text-lg font-medium tracking-tight">
           <button
